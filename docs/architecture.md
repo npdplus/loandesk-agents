@@ -106,7 +106,12 @@ providers (September 2025), as a learning exercise:
 
 | Environment | Type | Purpose |
 |---|---|---|
-| `LoanDesk-Dev` | Power Platform Developer environment | Build |
-| `LoanDesk-Test` | Developer or sandbox environment | Deploy with Pipelines and run the test set (0.3.0) |
+| `LoanDesk-Dev` | Sandbox with Dataverse, billed pay-as-you-go to Azure; macro region Asia Pacific | Build |
+| `LoanDesk-Test` | Sandbox, same billing pattern | Deploy with Pipelines and run the test set (0.3.0) |
 
-Azure resources live in one resource group, `rg-loandesk-dev`, with a budget alert.
+The pay-as-you-go billing plan uses two meters only: Dataverse (the first 1 GB of database and 1 GB of file
+capacity per environment are included) and Copilot Studio (per Copilot Credit). Why not a Developer
+environment: see [decision D5](decisions.md).
+
+Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 10 monthly budget alert:
+the Azure AI Search service (Free tier) and the pay-as-you-go billing plan; Foundry and Functions follow.
