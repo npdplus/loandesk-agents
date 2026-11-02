@@ -23,3 +23,15 @@ trimming is added.
 
 Azure AI Search Free tier, pay-as-you-go models in Microsoft Foundry, Azure Functions on the consumption plan,
 and a USD 10 budget alert on `rg-loandesk-dev`. Resources that are not needed between sessions are deleted.
+
+## D5 — A pay-as-you-go Sandbox, not a Developer environment (2026-11-02)
+
+Microsoft is retiring unmanaged Developer environments: none can be created from 15 November 2026, existing
+ones are suspended from 15 December 2026 and deleted from 15 January 2027. A Copilot Studio trial environment
+lasts 30 days, and a managed Developer environment needs premium licences.
+
+`LoanDesk-Dev` is therefore a Sandbox with Dataverse, linked to a pay-as-you-go billing plan in
+`rg-loandesk-dev`, so its cost counts against the same budget. The plan turns on only the Dataverse and
+Copilot Studio meters; Power Apps and Power Automate stay off (no apps, and premium flow runs would be billed
+per run). The system chose the region inside the Asia Pacific geography (Japan), and the billing plan matches
+it. Data residency does not matter here because all data is fictional.

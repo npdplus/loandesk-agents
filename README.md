@@ -7,7 +7,8 @@ A small business asks about a working-capital loan, checks whether it qualifies,
 answer from the bank's policy documents (RAG), pre-screen the application, and hand it to a credit officer.
 **A person makes every decision; the AI never approves a loan.**
 
-> **Status:** planning for v0.1.0. Nothing is built yet. See [the roadmap](docs/roadmap.md).
+> **Status:** v0.1.0 in progress. The environments are ready and the knowledge documents are written; the
+> agents are not built yet. See [the roadmap](docs/roadmap.md) and [the v0.1.0 plan](docs/v0.1.0-plan.md).
 >
 > Everything here is fictional: Contoso Bank, its products, rates, policies, customers and applications.
 > This is a learning and portfolio project, not a banking product.
