@@ -34,16 +34,29 @@ agent, and the A2A protocol. Notes go in `docs/study/`.
 | Web page (demo website or test pane) | Customers | None | Public documents only |
 | Microsoft Teams | Credit officers | Microsoft Entra ID | Public and internal documents |
 
-Internal documents (the credit manual) must never reach the customer channel. v0.1.0 keeps them in a separate
-knowledge source that only the staff agent uses; v0.3.0 can move to per-user security trimming in Azure AI
-Search.
+Internal documents (the credit manual) must never reach the customer channel. They are kept out of the
+customer's index altogether ([decision D6](decisions.md)); v0.3.0 can move to per-user security trimming in
+Azure AI Search.
 
 ## 4. Knowledge (RAG)
 
-| Source | Content | Why this source |
+| Source | Content | Used by |
 |---|---|---|
-| SharePoint site "Contoso Bank Lending" | Short guides and the FAQ | The simplest source; shows SharePoint as knowledge |
-| Azure AI Search index `loan-policy` | The full policy library, chunked, with metadata (`doc_type`, `audience`, `effective_date`) | Larger sets, filters and control over retrieval |
+| SharePoint site "Contoso Bank Lending" | Short guides and the FAQ | Both agents; shows SharePoint as knowledge |
+| Azure AI Search index `loan-policy-public` | Blob container `knowledge-public`: the six public documents | Customer agent |
+| Azure AI Search index `loan-policy-staff` | Blob container `knowledge`: all seven documents, including the internal credit manual | Staff agent |
+
+Both indexes were built with the portal's **Import data → RAG** wizard (integrated vectorization):
+- the data source is Azure Blob Storage (`stloandeskdev`), with native blob soft-delete tracking, so a
+  document deleted from the container also leaves the index;
+- a skillset splits each document into chunks and embeds them with `text-embedding-3-small`, deployed in
+  Microsoft Foundry (`aif-loandesk-dev`); the same model embeds questions at query time;
+- index fields: `chunk_id`, `parent_id`, `chunk`, `title` (the file name), `text_vector`;
+- semantic ranker enabled; the indexer runs once, on demand.
+
+The front matter in each document (`doc_type`, `audience`, `effective_date`) is not mapped to index fields
+yet. The index has no `metadata_storage_path`, so Copilot Studio citations show the file name without a
+link; add the field if links are needed.
 
 Answer rules:
 - Answer only from the sources; cite the document.
@@ -79,7 +92,8 @@ Table **Loan Application** (`ldk_loanapplication`):
 
 | Name | Holds | Version |
 |---|---|---|
-| `ldk_SearchIndexName` | Azure AI Search index name | 0.1.0 |
+| `ldk_SearchIndexPublic` | Customer index name (`loan-policy-public`) | 0.1.0 |
+| `ldk_SearchIndexStaff` | Staff index name (`loan-policy-staff`) | 0.1.0 |
 | `ldk_CreditApiBaseUrl` | Base URL of the Credit Score API | 0.2.0 |
 | `ldk_McpServerUrl` | URL of the MCP server | 0.2.0 |
 | `ldk_ApproverEmail` | Credit officer mailbox for approvals | 0.2.0 |
@@ -114,4 +128,12 @@ capacity per environment are included) and Copilot Studio (per Copilot Credit). 
 environment: see [decision D5](decisions.md).
 
 Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 10 monthly budget alert:
-the Azure AI Search service (Free tier) and the pay-as-you-go billing plan; Foundry and Functions follow.
+
+| Resource | Name | Notes |
+|---|---|---|
+| Azure AI Search | `srch-loandesk-dev` | Free tier, Southeast Asia; two indexes |
+| Storage account | `stloandeskdev` | Standard LRS, Hot; containers `knowledge` and `knowledge-public`; no anonymous access |
+| Microsoft Foundry | `aif-loandesk-dev`, project `loandesk-dev` | Southeast Asia; deployment `text-embedding-3-small`, Global Standard, 10,000 tokens a minute |
+| Power Platform billing plan | pay-as-you-go | Dataverse and Copilot Studio meters only |
+
+Azure Functions follow in v0.2.0.

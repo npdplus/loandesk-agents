@@ -35,3 +35,20 @@ lasts 30 days, and a managed Developer environment needs premium licences.
 Copilot Studio meters; Power Apps and Power Automate stay off (no apps, and premium flow runs would be billed
 per run). The system chose the region inside the Asia Pacific geography (Japan), and the billing plan matches
 it. Data residency does not matter here because all data is fictional.
+
+## D6 — Two vector indexes, one per audience (2026-11-02)
+
+Copilot Studio connects an agent to **one** Azure AI Search vector index, expects integrated vectorization,
+and its documentation does not describe filtering that index per agent. One index with an `audience` filter
+could therefore not guarantee that the customer agent never retrieves the internal credit manual.
+
+So there are two indexes: `loan-policy-public` (the six public documents) for the customer agent and
+`loan-policy-staff` (all seven) for the staff agent. The public documents are stored twice, which is
+acceptable at this size. The Free tier allows three indexes.
+
+Related choices, to revisit in v0.3.0:
+- **Embedding model:** `text-embedding-3-small` on a Global Standard deployment with a 10,000 tokens-a-minute
+  cap. Global Standard may process data outside the resource's geography; a real bank would choose a
+  regional (Standard) or Data Zone deployment.
+- **Authentication:** API keys between Search, Storage and Foundry for now; managed identities later.
+- **Semantic ranker:** enabled. Check that the service uses the free semantic ranker plan.

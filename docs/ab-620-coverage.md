@@ -54,7 +54,7 @@ build).
 |---|---|---|---|
 | Connect to Copilot connectors | A Copilot connector as an extra knowledge source | 0.3.0 | Planned |
 | Connect to Microsoft Power Platform connectors | Dataverse or Outlook connector | 0.2.0 | Planned |
-| Connect to Azure AI Search | `loan-policy` index | 0.1.0 | Planned |
+| Connect to Azure AI Search | `loan-policy-public` and `loan-policy-staff` (indexes built; connection to the agents pending) | 0.1.0 | Planned |
 
 ### Add tools to agents
 
@@ -99,7 +99,7 @@ build).
 |---|---|---|---|
 | Create a solution | LoanDesk solution | 0.1.0 | Planned |
 | Add existing agents to a solution | Agents built in the solution or added to it | 0.1.0 | Planned |
-| Create and use environment variables | `ldk_SearchIndexName` and later variables | 0.1.0 | Planned |
+| Create and use environment variables | `ldk_SearchIndexPublic`, `ldk_SearchIndexStaff` and later variables | 0.1.0 | Planned |
 | Implement and extend Microsoft Power Platform Pipelines | Dev to Test | 0.3.0 | Planned |
 
 ## Totals
