@@ -218,3 +218,32 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- LoanDesk additions ----
+
+# Azure Functions
+local.settings.json
+.python_packages/
+__azurite_db*__.json
+__blobstorage__/
+__queuestorage__/
+bin/
+obj/
+
+# Azure Developer CLI
+.azure/
+
+# Power Platform: exported solution packages and CLI output
+out/
+*.zip
+.pac/
+
+# Node (tools and test UIs)
+node_modules/
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
