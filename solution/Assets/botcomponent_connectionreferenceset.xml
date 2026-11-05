@@ -1,0 +1,8 @@
+<botcomponent_connectionreferenceset>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr8c5_loandeskcustomeragent_lnC1dD.tool.Azure-FoundryIQ-FoundryIQKnowledgeRetrievalMCP_AM7" connectionreferenceid.connectionreferencelogicalname="cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_azureaisearch.bec50b21da7c4d81bc2b3e0c9eedf4b7">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr8c5_loandeskstaffagent_oML8iB.tool.Azure-FoundryIQ-FoundryIQKnowledgeRetrievalMCP_x1t" connectionreferenceid.connectionreferencelogicalname="cr8c5_loandeskstaffagent_oML8iB.cr.shared_azureaisearchfoundryiq.bec50b21da7c4d81bc2b3e0c9eedf4b7">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+</botcomponent_connectionreferenceset>

@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="ldk_SearchIndexPublic">
+  <defaultvalue>loan-policy-public</defaultvalue>
+  <description default="Azure AI Search index for the customer agent">
+    <label description="Azure AI Search index for the customer agent" languagecode="1033" />
+  </description>
+  <displayname default="Search index (public)">
+    <label description="Search index (public)" languagecode="1033" />
+  </displayname>
+  <introducedversion>0.1.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

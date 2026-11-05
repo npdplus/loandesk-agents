@@ -1,0 +1,10 @@
+<botcomponent schemaname="cr8c5_draft_GkUvCh.iqCapability.teams_y_t">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>teams</name>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
