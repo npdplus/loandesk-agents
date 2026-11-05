@@ -104,7 +104,7 @@ The same MCP tool also gives early practice with *Configure MCP tools*, planned 
 - **Names:** the agent name field holds about 30 characters, so the agents are *LoanDesk Customer Agent* and
   *LoanDesk Staff Agent* (planned as *Contoso Policy Agent (customer/staff)*).
 
-## D10 — Work IQ capability components left on the agents (2026-11-05; removal due before v0.2.0)
+## D10 — Work IQ capability components left on the agents (2026-11-05; closed)
 
 A new agent starts with the *Work IQ* tool, which grounds answers in the signed-in user's Microsoft 365 mail,
 calendar, files, people, sites and Teams. It was removed from both agents (the staff agent before its first
@@ -119,3 +119,8 @@ The agents do not need Microsoft 365 data, and least privilege says they should 
   calendar", and the debug view showed no tool call. No sign the components are active.
 - That does not prove they are inert: the instructions alone could explain the refusal. Before v0.2.0
   publishes the agents, remove the components and export again.
+
+Closed 2026-11-05: the twelve components were deleted from the environment (*Solutions → LoanDesk → Agent
+components → Delete from this environment*; first one, then the other eleven). Both agents were re-tested in
+Preview with an in-scope question and answered as before, with a `Source:` line. The solution was exported as
+0.1.1.0, which has no `IQCapability` components.
