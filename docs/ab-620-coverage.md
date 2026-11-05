@@ -89,9 +89,9 @@ build).
 
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
-| Create a test set | `evals/` | 0.1.0 | Planned |
-| Choose an evaluation method | Exact facts, citation present, refusal expected | 0.1.0 | Planned |
-| Review test results | Results stored in `evals/results/` | 0.1.0 | Planned |
+| Create a test set | `evals/v0.1.0-test-set.csv`, imported per agent from `evals/import/` | 0.1.0 | Done |
+| Choose an evaluation method | Compare meaning against written expected answers | 0.1.0 | Done |
+| Review test results | One failure found, fixed in the instructions and rerun; `evals/results/` | 0.1.0 | Done |
 
 ### Implement application lifecycle management (ALM) for agents in Copilot Studio
 
