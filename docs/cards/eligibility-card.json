@@ -1,0 +1,17 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    { "type": "TextBlock", "text": "Check if your business can apply", "weight": "Bolder", "size": "Medium", "wrap": true },
+    { "type": "TextBlock", "text": "SME Working Capital Loan, Contoso Bank (fictional). This is a pre-check, not a loan decision.", "isSubtle": true, "wrap": true },
+    { "type": "Input.Number", "id": "yearsInBusiness", "label": "Years in business", "min": 0, "isRequired": true, "errorMessage": "Enter the number of years." },
+    { "type": "Input.Number", "id": "annualRevenue", "label": "Annual revenue in the latest full year (THB)", "min": 0, "isRequired": true, "errorMessage": "Enter the annual revenue." },
+    { "type": "Input.Number", "id": "requestedAmount", "label": "Amount you want to borrow (THB)", "min": 0, "isRequired": true, "errorMessage": "Enter the amount." },
+    { "type": "Input.ChoiceSet", "id": "termMonths", "label": "Term", "style": "compact", "isRequired": true, "errorMessage": "Choose a term.",
+      "choices": [
+        { "title": "6 months", "value": "6" }, { "title": "12 months", "value": "12" }, { "title": "18 months", "value": "18" },
+        { "title": "24 months", "value": "24" }, { "title": "36 months", "value": "36" } ] }
+  ],
+  "actions": [ { "type": "Action.Submit", "title": "Check" } ]
+}

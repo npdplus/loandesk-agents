@@ -124,3 +124,22 @@ Closed 2026-11-05: the twelve components were deleted from the environment (*Sol
 components → Delete from this environment*; first one, then the other eleven). Both agents were re-tested in
 Preview with an in-scope question and answered as before, with a `Source:` line. The solution was exported as
 0.1.1.0, which has no `IQCapability` components.
+
+## D11 — Topic skills on a third agent built on the standard harness (2026-11-05)
+
+Copilot Studio now has two *harnesses*. The customer and staff agents use the **GitHub Copilot harness** (the
+new experience), where topics and branching flows are replaced by instructions, skills and hooks, prompt
+tools by skills, and Azure AI Search is not offered as knowledge. The **standard harness** keeps topics,
+adaptive cards, variables, the generative answers node and prompts, and stays fully supported. An agent cannot
+move between harnesses after it is created.
+
+The AB-620 study guide still lists the topic skills, so v0.2.0 adds a third agent, **LoanDesk Apply Agent**,
+built from *Home → Other ways to build → Build with standard orchestration → Agent (Standard)*. It holds the
+eligibility check (adaptive card, variables, custom prompt), the rates topic with topic-level knowledge, the
+generative answers node and the Apply topic that calls the Submit Application agent flow. The flow is built
+from *Agent flows (Standard)* on the same page. In v0.3.0 the customer agent reaches the Apply Agent as a
+connected agent, which also practises multi-agent collaboration.
+
+The two existing agents stay on the new harness. The project therefore shows both harnesses side by side.
+
+Source: Microsoft Learn, *Agents overview* (agents experience), read 2026-11-05.
