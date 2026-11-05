@@ -103,3 +103,19 @@ The same MCP tool also gives early practice with *Configure MCP tools*, planned 
   so they are avoided in this demo.
 - **Names:** the agent name field holds about 30 characters, so the agents are *LoanDesk Customer Agent* and
   *LoanDesk Staff Agent* (planned as *Contoso Policy Agent (customer/staff)*).
+
+## D10 — Work IQ capability components left on the agents (2026-11-05; removal due before v0.2.0)
+
+A new agent starts with the *Work IQ* tool, which grounds answers in the signed-in user's Microsoft 365 mail,
+calendar, files, people, sites and Teams. It was removed from both agents (the staff agent before its first
+save). The solution export still holds six components per agent of kind `IQCapability`, each with
+`access: Write`, while each agent's configuration says `WorkIqAddedByDefault: false` and lists only the
+Foundry IQ tool.
+
+The agents do not need Microsoft 365 data, and least privilege says they should not have it. Next steps:
+
+- Test in Preview whether the customer agent can read the maker's calendar or mail. **Done 2026-11-05:**
+  "What is on my calendar today?" got "I can only help with the SME Working Capital Loan, so I can't see your
+  calendar", and the debug view showed no tool call. No sign the components are active.
+- That does not prove they are inert: the instructions alone could explain the refusal. Before v0.2.0
+  publishes the agents, remove the components and export again.

@@ -1,0 +1,17 @@
+kind: McpTool
+authMode: Maker
+connectionReference: cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_azureaisearch.bec50b21da7c4d81bc2b3e0c9eedf4b7
+connectorId: /providers/Microsoft.PowerApps/apis/shared_azureaisearchfoundryiq
+operationId: AzureAISearchKBRetrieveMcp
+toolInputs:
+  - name: knowledgeBaseName
+    value:
+      kind: ValueReference
+      type: "{\"type\":\"string\"}"
+      defaultValue: "\"kb-loan-policy-public\""
+
+  - name: api-version
+    value:
+      kind: ValueReference
+      type: "{\"type\":\"string\"}"
+      defaultValue: "\"2026-05-01-Preview\""

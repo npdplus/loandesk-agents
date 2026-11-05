@@ -1,0 +1,11 @@
+<botcomponent schemaname="cr8c5_loandeskcustomeragent_lnC1dD.tool.Azure-FoundryIQ-FoundryIQKnowledgeRetrievalMCP_AM7">
+  <componenttype>9</componenttype>
+  <description>Microsoft Foundry IQ Knowledge base retrieval via MCP protocol. Ground your agent using the Foundry IQ knowledge base for high-quality, consumption-based retrieval, delivering permission-aware, cited responses.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Azure - Foundry IQ — Foundry IQ Knowledge Retrieval MCP</name>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

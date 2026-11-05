@@ -1,0 +1,34 @@
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26102.127" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26102.00127">
+  <Entities></Entities>
+  <Roles></Roles>
+  <Workflows></Workflows>
+  <FieldSecurityProfiles></FieldSecurityProfiles>
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_azureaisearch.bec50b21da7c4d81bc2b3e0c9eedf4b7">
+      <connectionreferencedisplayname>cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_azureaisearch.bec50b21da7c4d81bc2b3e0c9eedf4b7</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_azureaisearchfoundryiq</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cr8c5_loandeskstaffagent_oML8iB.cr.shared_azureaisearchfoundryiq.bec50b21da7c4d81bc2b3e0c9eedf4b7">
+      <connectionreferencedisplayname>cr8c5_loandeskstaffagent_oML8iB.cr.shared_azureaisearchfoundryiq.bec50b21da7c4d81bc2b3e0c9eedf4b7</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_azureaisearchfoundryiq</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>
