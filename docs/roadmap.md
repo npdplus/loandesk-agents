@@ -44,6 +44,8 @@ Detailed plan: [v0.1.0-plan.md](v0.1.0-plan.md).
 
 **Coverage:** 21 more, 34 of 44 (77 %).
 
+Detailed plan: [v0.2.0-plan.md](v0.2.0-plan.md).
+
 ## v0.3.0 — Multi-agent and lifecycle
 
 **Goal:** a Front Desk agent routes requests to specialist agents, and the solution moves from Dev to Test.

@@ -1,7 +1,8 @@
 # Solution
 
-The **LoanDesk** Power Platform solution, version 0.1.0.0, publisher *NPD PLUS Labs* (`npdpluslabs`, prefix
-`ldk`). Exported **unmanaged** from `LoanDesk-Dev` on 2026-11-05 (Solutions → Export solution) and unzipped
+The **LoanDesk** Power Platform solution, version 0.1.1.0, publisher *NPD PLUS Labs* (`npdpluslabs`, prefix
+`ldk`). Exported **unmanaged** from `LoanDesk-Dev` on 2026-11-05 (0.1.0.0 is tagged `v0.1.0`; 0.1.1.0 removes
+the Work IQ capability components) (Solutions → Export solution) and unzipped
 here. Line endings were normalised to LF, trailing spaces and one byte-order mark were removed; nothing else
 was changed.
 
@@ -10,7 +11,6 @@ was changed.
 | `solution.xml`, `customizations.xml`, `[Content_Types].xml` | Solution manifest and customisations |
 | `bots/<agent>/bot.xml`, `configuration.json` | The two agents: name, model (`claude-sonnet-5-5`), instructions, web search off |
 | `botcomponents/*.tool.Azure-FoundryIQ-*` | The Foundry IQ MCP tool of each agent, with its knowledge base name (`kb-loan-policy-public` or `kb-loan-policy-staff`) |
-| `botcomponents/*.iqCapability.*` | Work IQ capability components (calendar, files, mail, people, sites, teams); see below |
 | `botcomponents/Default_FeedbackCollectionBotSettings_*` | Feedback settings |
 | `Assets/botcomponent_connectionreferenceset.xml` | Links each tool to its connection reference |
 | `environmentvariabledefinitions/` | `ldk_SearchIndexPublic`, `ldk_SearchIndexStaff` |
@@ -25,9 +25,8 @@ was changed.
 
 - The agents and their tool connection references use the prefix `cr8c5_` of the environment's default
   publisher, because they were created before they joined the solution.
-- Each agent carries six Work IQ capability components with `access: Write`, although Work IQ is not among
-  the agents' tools and `WorkIqAddedByDefault` is `false`. A Preview test showed no Work IQ call; they are to
-  be removed before v0.2.0 (decision D10 in [../docs/decisions.md](../docs/decisions.md)).
+- 0.1.0.0 carried six Work IQ capability components per agent with `access: Write`. They were deleted in
+  0.1.1.0 (decision D10 in [../docs/decisions.md](../docs/decisions.md)).
 
 ## Next exports
 
