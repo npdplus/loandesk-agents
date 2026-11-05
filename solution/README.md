@@ -26,8 +26,8 @@ was changed.
 - The agents and their tool connection references use the prefix `cr8c5_` of the environment's default
   publisher, because they were created before they joined the solution.
 - Each agent carries six Work IQ capability components with `access: Write`, although Work IQ is not among
-  the agents' tools and `WorkIqAddedByDefault` is `false`. Whether they have any effect without the tool is
-  not known yet; see decision D10 in [../docs/decisions.md](../docs/decisions.md).
+  the agents' tools and `WorkIqAddedByDefault` is `false`. A Preview test showed no Work IQ call; they are to
+  be removed before v0.2.0 (decision D10 in [../docs/decisions.md](../docs/decisions.md)).
 
 ## Next exports
 
