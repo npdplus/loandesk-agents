@@ -16,8 +16,8 @@ Contoso Bank offers one product in this demo: the **SME Working Capital Loan**.
 
 | Component | What it is | Version |
 |---|---|---|
-| Policy Agent | Copilot Studio agent. Answers from policy documents with citations (generative answers, Azure AI Search, SharePoint) | 0.1.0 |
-| Eligibility topic | Topic with an adaptive card; checks the basic rules and explains the result | 0.1.0 |
+| Policy Agent | Two Copilot Studio agents, *LoanDesk Customer Agent* and *LoanDesk Staff Agent*. Answer from policy documents and name the source (Azure AI Search through Foundry IQ; SharePoint from 0.2.0) | 0.1.0 |
+| Eligibility topic | Topic with an adaptive card; checks the basic rules and explains the result | 0.2.0 |
 | Submit Application flow | Agent flow: creates the application in Dataverse, asks a credit officer to decide (human in the loop), tells the customer | 0.2.0 |
 | Credit Score API | Azure Function (Python) returning a mock score for a fictional business ID; called through a custom connector and as a REST tool | 0.2.0 |
 | Application Status MCP server | Azure Function (Python) MCP server with one read-only tool, `get_application_status` | 0.2.0 |
@@ -42,7 +42,7 @@ Azure AI Search.
 
 | Source | Content | Used by |
 |---|---|---|
-| SharePoint site "Contoso Bank Lending" | Short guides and the FAQ | Both agents; shows SharePoint as knowledge |
+| SharePoint site "Contoso Bank Lending" | Short guides and the FAQ | Both agents from 0.2.0; shows SharePoint as knowledge |
 | Azure AI Search index `loan-policy-public` | Blob container `knowledge-public`: the six public documents | Customer agent |
 | Azure AI Search index `loan-policy-staff` | Blob container `knowledge`: all seven documents, including the internal credit manual | Staff agent |
 
@@ -54,9 +54,22 @@ Both indexes were built with the portal's **Import data → RAG** wizard (integr
 - index fields: `chunk_id`, `parent_id`, `chunk`, `title` (the file name), `text_vector`;
 - semantic ranker enabled; the indexer runs once, on demand.
 
+The agents reach the indexes through **Foundry IQ** (agentic retrieval in Azure AI Search), because the
+current Copilot Studio experience adds Azure AI Search as a tool, not as knowledge ([decision D8](decisions.md)):
+
+```text
+index loan-policy-public ─► knowledge source ks-loan-policy-public ─► knowledge base kb-loan-policy-public
+                                                                         │ reasoning effort Minimal,
+                                                                         │ output Extractive data
+LoanDesk Customer Agent ─► tool "Foundry IQ Knowledge Retrieval MCP" ────┘ (query-key connection)
+```
+
+The staff side is the same with `loan-policy-staff`, `ks-loan-policy-staff` and `kb-loan-policy-staff`.
+
 The front matter in each document (`doc_type`, `audience`, `effective_date`) is not mapped to index fields
 yet. The index has no `metadata_storage_path`, so Copilot Studio citations show the file name without a
-link; add the field if links are needed.
+link; add the field if links are needed. Through the MCP tool, the readable file name is in each chunk's
+`title` field, and the instructions make the agent end each answer with a `Source:` line.
 
 Answer rules:
 - Answer only from the sources; cite the document.

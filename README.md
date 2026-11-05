@@ -7,8 +7,10 @@ A small business asks about a working-capital loan, checks whether it qualifies,
 answer from the bank's policy documents (RAG), pre-screen the application, and hand it to a credit officer.
 **A person makes every decision; the AI never approves a loan.**
 
-> **Status:** v0.1.0 in progress. Environments are ready, the knowledge documents are written and indexed
-> in Azure AI Search (one index per audience); the agents are not built yet. See [the roadmap](docs/roadmap.md) and [the v0.1.0 plan](docs/v0.1.0-plan.md).
+> **Status:** v0.1.0 in progress. The knowledge documents are indexed in Azure AI Search (one index per
+> audience). The customer agent and the staff agent each answer from their own index through a Foundry IQ
+> knowledge base and name their sources; internal content reaches only the staff agent. Next: the test set. See [the roadmap](docs/roadmap.md) and
+> [the v0.1.0 plan](docs/v0.1.0-plan.md).
 >
 > Everything here is fictional: Contoso Bank, its products, rates, policies, customers and applications.
 > This is a learning and portfolio project, not a banking product.
@@ -45,7 +47,7 @@ Staff (Teams) ───┴──► Front Desk ─────┼── Document
 | Microsoft Copilot Studio | Agents, topics, agent flows, tools, evaluation |
 | Microsoft Dataverse | Loan applications, environment variables, solution packaging |
 | SharePoint Online and Microsoft Teams | Short guides as a knowledge source; the staff channel |
-| Azure AI Search | Retrieval over the policy library: one vector index per audience |
+| Azure AI Search (Foundry IQ) | Retrieval over the policy library: one vector index and one knowledge base per audience |
 | Azure Blob Storage | The documents the indexes are built from |
 | Microsoft Foundry | The embedding model; later, models for custom prompts and the Document Agent |
 | Azure Functions (Python) | The mock credit-score API and the MCP server |
