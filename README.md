@@ -7,13 +7,28 @@ A small business asks about a working-capital loan, checks whether it qualifies,
 answer from the bank's policy documents (RAG), pre-screen the application, and hand it to a credit officer.
 **A person makes every decision; the AI never approves a loan.**
 
-> **Status:** v0.1.0 in progress. The knowledge documents are indexed in Azure AI Search (one index per
-> audience). The customer agent and the staff agent each answer from their own index through a Foundry IQ
-> knowledge base and name their sources; internal content reaches only the staff agent. Next: the test set. See [the roadmap](docs/roadmap.md) and
-> [the v0.1.0 plan](docs/v0.1.0-plan.md).
+> **Status:** v0.1.0 done (2026-11-05). Two agents, one per audience, answer from their own Azure AI Search
+> index through a Foundry IQ knowledge base and name their sources; internal content reaches only the staff
+> agent. The 30-question test set passes in Copilot Studio Evaluate. Next: v0.2.0. See
+> [the roadmap](docs/roadmap.md) and [the v0.1.0 plan](docs/v0.1.0-plan.md).
 >
 > Everything here is fictional: Contoso Bank, its products, rates, policies, customers and applications.
 > This is a learning and portfolio project, not a banking product.
+
+## v0.1.0 in pictures
+
+The customer agent answers from the public documents and names them:
+
+![Customer agent answering the minimum revenue question, with a Source line](docs/images/v0.1.0-customer-answer.png)
+
+The staff agent answers the same kind of internal question from the credit manual, without deciding:
+
+![Staff agent quoting the DSCR decision guide, with a reminder and a Source line](docs/images/v0.1.0-staff-answer.png)
+
+The customer test set in Copilot Studio Evaluate, 25 of 25 after one fix
+([results](evals/results/v0.1.0/2026-11-05-copilot-studio-evaluate/summary.md)):
+
+![Copilot Studio Evaluate run, 25 of 25 passed](docs/images/v0.1.0-evaluate-customer.png)
 
 ## Why this project exists
 
