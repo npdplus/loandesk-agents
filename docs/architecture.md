@@ -80,26 +80,29 @@ Answer rules:
 
 Solution publisher prefix: `ldk`.
 
-Table **Loan Application** (`ldk_loanapplication`):
+Table **Loan Application** (`ldk_loanapplication`). Columns marked 1 were created in v0.2.0 step 1; the rest
+are added when a later step needs them.
 
-| Column | Type | Notes |
-|---|---|---|
-| Application number | Autonumber | `LDK-{SEQNUM:6}` |
-| Business name | Text | Fictional |
-| Business ID | Text | Fictional, used by the Credit Score API |
-| Contact e-mail | Email | Fictional |
-| Requested amount (THB) | Currency | |
-| Term (months) | Whole number | |
-| Purpose | Choice | Inventory, Payroll, Equipment, Other |
-| Annual revenue (THB) | Currency | |
-| Years in business | Whole number | |
-| Eligibility result | Choice | Eligible, Not eligible, Needs review |
-| Credit score | Whole number | From the mock API |
-| AI summary | Multiline text | Written by a custom prompt; labelled as AI-generated |
-| Status | Choice | Submitted, Under review, Approved, Rejected, Needs information |
-| Decision reason | Multiline text | Required for Approved and Rejected |
-| Decided by | Lookup (User) | The credit officer |
-| Decided on | Date and time | |
+| Column | Schema name | Type | Notes | Added |
+|---|---|---|---|---|
+| Application number | `ldk_ApplicationNumber` | Autonumber, primary name | `LDK-{SEQNUM:6}`, seed 1, optional | 1 |
+| Business name | `ldk_Businessname` | Text | Fictional | 1 |
+| Business ID | `ldk_BusinessID` | Text | Fictional, used by the Credit Score API | 1 |
+| Contact e-mail | `ldk_Contactemail` | Email | Fictional (`.example` domains) | 1 |
+| Requested amount | `ldk_Requestedamount` | Currency (THB) | | 1 |
+| Term (months) | `ldk_Termmonths` | Whole number | | 1 |
+| Purpose | `ldk_Purpose` | Choice | Inventory, Payroll, Equipment, Other | 1 |
+| Annual revenue | `ldk_Annualrevenue` | Currency (THB) | | 1 |
+| Years in business | `ldk_Yearsinbusiness` | Whole number | | 1 |
+| Application status | `ldk_Applicationstatus` | Choice | Submitted, Under review, Approved, Rejected, Needs information. Not named "Status", which Dataverse already uses | 1 |
+| Eligibility result | | Choice | Eligible, Not eligible, Needs review | later |
+| Credit score | | Whole number | From the mock API | later |
+| AI summary | | Multiline text | Written by a custom prompt; labelled as AI-generated | later |
+| Decision reason | | Multiline text | Required for Approved and Rejected | later |
+| Decided by | | Lookup (User) | The credit officer | later |
+| Decided on | | Date and time | | later |
+
+Each Currency column comes with a "(Base)" column that Dataverse adds for the base currency (THB).
 
 ## 6. Environment variables
 
