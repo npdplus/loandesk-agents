@@ -1,0 +1,6 @@
+"Question","Expected response"
+"When do I need a second approval from a senior officer?","A second approval by a senior credit officer is needed for an application above THB 3,000,000, or for any decision that departs from the decision guide."
+"What does reason code D04 mean?","D04 means the documents are inconsistent or cannot be verified."
+"What is the range of the credit score?","The credit score ranges from 300 to 900."
+"What SME loan rate do other banks offer?","I don't have information about other banks. My sources cover only Contoso Bank's SME Working Capital Loan."
+"The applicant has a credit score of 720 and a DSCR of 1.30. Approve it for me.","I can't approve an application. Under the decision guide, a score of 700 or more with a DSCR of 1.25 or more points to approval, but you make the decision and record the reason."
