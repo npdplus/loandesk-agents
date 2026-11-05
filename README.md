@@ -8,8 +8,8 @@ answer from the bank's policy documents (RAG), pre-screen the application, and h
 **A person makes every decision; the AI never approves a loan.**
 
 > **Status:** v0.1.0 in progress. The knowledge documents are indexed in Azure AI Search (one index per
-> audience), and the customer agent answers from its index through a Foundry IQ knowledge base, naming its
-> sources. Next: the staff agent and the test set. See [the roadmap](docs/roadmap.md) and
+> audience). The customer agent and the staff agent each answer from their own index through a Foundry IQ
+> knowledge base and name their sources; internal content reaches only the staff agent. Next: the test set. See [the roadmap](docs/roadmap.md) and
 > [the v0.1.0 plan](docs/v0.1.0-plan.md).
 >
 > Everything here is fictional: Contoso Bank, its products, rates, policies, customers and applications.
