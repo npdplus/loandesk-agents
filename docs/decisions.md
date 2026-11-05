@@ -52,3 +52,54 @@ Related choices, to revisit in v0.3.0:
   regional (Standard) or Data Zone deployment.
 - **Authentication:** API keys between Search, Storage and Foundry for now; managed identities later.
 - **Semantic ranker:** enabled. Check that the service uses the free semantic ranker plan.
+
+Update 2026-11-05: the portal's *Premium features* page shows the semantic ranker and knowledge retrieval
+both on the **Free** plan (USD 0 a month); the Standard plans cannot be selected on the Free tier.
+
+## D7 — A Copilot Studio trial licence for the maker (2026-11-03)
+
+Saving an agent needs a Copilot Studio user licence, even in a pay-as-you-go environment. What was tried:
+
+- The tenant setting *Copilot Studio pay-as-you-go users* set to an Entra group of makers: needed, not enough.
+- The USD 0 *Microsoft Copilot Studio User License*: needs the paid *Microsoft Copilot Studio* capacity pack
+  as a prerequisite.
+- The admin-centre *Microsoft Copilot Studio (Trial)*: **converts to a paid one-year subscription** when the
+  trial ends. Not ordered.
+
+Chosen: the self-service individual trial (sign-up from Copilot Studio). It can build and test agents but
+cannot **publish** them; it lasts 30 days and can be extended once by 30 days. So v0.1.0 tests agents in the
+Preview pane, and channels move to a later version. The Preview pane shows the Copilot Credits each
+conversation uses; the tests on 2026-11-05 showed 0.
+
+## D8 — Azure AI Search through a Foundry IQ knowledge base (2026-11-05)
+
+The current Copilot Studio experience has no *Azure AI Search* option under **Knowledge**. Search is added as
+a **tool**: the Microsoft *Azure - Foundry IQ* MCP server, which calls a **knowledge base** in Azure AI Search
+(agentic retrieval). The chain is index → knowledge source → knowledge base → MCP tool → agent.
+
+| Object | Customer agent | Staff agent |
+|---|---|---|
+| Knowledge source (type *Search index*) | `ks-loan-policy-public` → `loan-policy-public` | `ks-loan-policy-staff` → `loan-policy-staff` |
+| Knowledge base | `kb-loan-policy-public` | `kb-loan-policy-staff` |
+
+Settings, chosen to keep cost at zero and the answer under the agent's control:
+
+- **Reasoning effort: Minimal.** No LLM query planning, so no Foundry model is needed and nothing is billed
+  outside the Search free allowance (50 million agentic retrieval tokens a month on the Free plan).
+- **Output mode: Extractive data.** The knowledge base returns chunks; the agent writes the answer.
+- Source data fields and search fields: `chunk`, `title`; the index's semantic configuration.
+- **Connection: a query key**, not an admin key. A query key can retrieve but cannot change or delete
+  anything. Side effect: the tool set-up cannot list knowledge bases, so the name is typed in.
+
+Citations: the tool returns each chunk with a `Title` of the chunk ID and a `URL` of `mcp://searchindex/...`,
+which Copilot Studio cannot show as a readable link. The file name is in the chunk's `title` field, so the
+instructions tell the agent to end each answer with a `Source:` line listing those file names.
+
+The same MCP tool also gives early practice with *Configure MCP tools*, planned in full for v0.2.0.
+
+## D9 — Model and agent names (2026-11-03)
+
+- **Model:** Claude Sonnet 5.5. Reasoning models are billed by Copilot Studio as premium, per 1,000 tokens,
+  so they are avoided in this demo.
+- **Names:** the agent name field holds about 30 characters, so the agents are *LoanDesk Customer Agent* and
+  *LoanDesk Staff Agent* (planned as *Contoso Policy Agent (customer/staff)*).

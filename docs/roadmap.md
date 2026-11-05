@@ -8,20 +8,21 @@ Coverage counts the 44 skill lines of the AB-620 study guide (updated 2026-10-16
 
 ## v0.1.0 — RAG core
 
-**Goal:** the Policy Agent answers questions about the SME Working Capital Loan from Contoso Bank's documents,
-cites them, and declines what it should not answer.
+**Goal:** a customer agent and a staff agent answer questions about the SME Working Capital Loan from Contoso
+Bank's documents, name their sources, and decline what they should not answer.
 
-- Knowledge: SharePoint guides and an Azure AI Search index over the policy library
-- Topics: generative answers node, custom prompt, response formatting, variables, eligibility adaptive card
-- Channels: a web test page for customers and Teams for staff, with a different knowledge scope each
-- Responsible AI: AI disclosure, hand-off to a person, content moderation settings
+- Knowledge: Azure AI Search indexes over the policy library, one per audience, reached through Foundry IQ
+  knowledge bases and an MCP tool
+- Responsible AI in the instructions: AI disclosure, hand-off to a person, no decisions, no internal content
+  for customers
 - ALM from day one: one solution, environment variables, solution exported and unpacked into `solution/`
-- Evaluation: the first test set (30 questions), run with Copilot Studio evaluation or the Copilot Studio Kit
+- Evaluation: the first test set (30 questions), run in the Copilot Studio Evaluate tab
+- Tested in the Preview pane: the maker's trial licence cannot publish (decision D7)
 
-**Done when:** the test set passes at the agreed rate (set in the v0.1.0 plan), answers cite sources, the
+**Done when:** the test set passes at the agreed rate (set in the v0.1.0 plan), answers name sources, the
 solution is in the repository, and the README shows screenshots.
 
-**Coverage:** 18 of 44 skill lines.
+**Coverage:** 13 of 44 skill lines (re-scoped 2026-11-05; topics moved to v0.2.0).
 
 Detailed plan: [v0.1.0-plan.md](v0.1.0-plan.md).
 
@@ -37,8 +38,11 @@ Detailed plan: [v0.1.0-plan.md](v0.1.0-plan.md).
   a Power Platform connector (Outlook or Teams notification)
 - Reusable components shared by the agents
 - Application Insights telemetry
+- Moved from v0.1.0: topics (generative answers node, custom prompt, topic-level knowledge, variables,
+  eligibility adaptive card), the SharePoint knowledge source, the web page and Teams channels with Entra ID
+  sign-in for staff, content moderation settings
 
-**Coverage:** 16 more, 34 of 44 (77 %).
+**Coverage:** 21 more, 34 of 44 (77 %).
 
 ## v0.3.0 — Multi-agent and lifecycle
 
