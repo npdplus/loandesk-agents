@@ -18,7 +18,7 @@ build).
 | Plan channels and deployment | Web test page and Teams | 0.1.0 | Planned |
 | Plan responsible AI strategy | AI disclosure, hand-off, content moderation, no AI decisions | 0.1.0 | Planned |
 | Evaluate security and governance considerations | Separate knowledge for customer and staff; governance table in the architecture | 0.1.0 | Planned |
-| Plan reusable agent components | Shared topics and flows used by more than one agent | 0.2.0 | Planned |
+| Plan reusable agent components | Component collection *LoanDesk shared components* (Talk to a person); shared with the Front Desk agent in 0.3.0 | 0.2.0 | Done |
 | Design agents for internal or external audiences | Customer agent and staff agent | 0.1.0 | Planned |
 
 ### Create and monitor agent flows in Copilot Studio
