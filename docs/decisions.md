@@ -143,3 +143,14 @@ connected agent, which also practises multi-agent collaboration.
 The two existing agents stay on the new harness. The project therefore shows both harnesses side by side.
 
 Source: Microsoft Learn, *Agents overview* (agents experience), read 2026-11-05.
+
+## D12 — Telemetry without conversation content (2026-11-06)
+
+The Apply Agent sends telemetry to Application Insights with logging and node execution events on, and
+**Log conversation details** and **Log sensitive Activity properties** off. The logs show which topics and
+nodes ran, when, and whether they failed, but not who wrote what. That is enough to monitor the agent, and a
+bank would not copy customer messages into an operations log (data minimisation). A Log Analytics daily cap of
+0.1 GB guards the cost.
+
+The connection string is not stored in the repository. Before each solution export, check that it is not in
+the exported agent files.
