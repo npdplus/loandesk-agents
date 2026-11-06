@@ -25,26 +25,26 @@ build).
 
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
-| Create an agent flow | Submit Application | 0.2.0 | Planned |
-| Create a human-in-the-loop agent flow | Credit officer approval step | 0.2.0 | Planned |
-| Configure actions and connectors | Dataverse and Outlook or Teams actions | 0.2.0 | Planned |
-| Monitor agent flows | Flow run history | 0.2.0 | Planned |
-| Add input and output parameters | Application details in; application number and status out | 0.2.0 | Planned |
-| Implement error handling in agent flows | Retry and a failure message when the API is down | 0.2.0 | Planned |
+| Create an agent flow | Submit Application | 0.2.0 | Done |
+| Create a human-in-the-loop agent flow | Credit officer approval step; decision written back | 0.2.0 | Done |
+| Configure actions and connectors | Dataverse and Approvals actions; Outlook or Teams later | 0.2.0 | Done |
+| Monitor agent flows | Run history used to find and fix a failed run | 0.2.0 | Done |
+| Add input and output parameters | Application details in; application number, status and message out | 0.2.0 | Done |
+| Implement error handling in agent flows | Run-after branch that answers the agent when the row cannot be saved | 0.2.0 | Done |
 
 ### Configure topics
 
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
-| Add agent flows to a topic | Apply topic calls Submit Application | 0.2.0 | Planned |
+| Add agent flows to a topic | Apply topic calls Submit Application | 0.2.0 | Done |
 | Configure agent response formatting | Answers with lists and a `Source:` line (instructions) | 0.1.0 | Planned |
 | Add tools to a topic | Check Status topic calls the MCP tool | 0.2.0 | Planned |
 | Configure advanced agent responses with custom prompts | Plain-language explanation of the eligibility result | 0.2.0 | Planned |
-| Configure advanced agent responses with custom knowledge sources | Topic-level knowledge for the rate table | 0.2.0 | Planned |
+| Configure advanced agent responses with custom knowledge sources | Rates topic limited to `rates-and-fees.md` | 0.2.0 | Done |
 | Configure advanced agent responses with API and Send HTTP requests | Credit Score API call | 0.2.0 | Planned |
-| Configure generative answers node | Policy questions | 0.2.0 | Planned |
-| Configure adaptive cards | Eligibility form and result card | 0.2.0 | Planned |
-| Manage variables | Eligibility inputs, global variables for the channel | 0.2.0 | Planned |
+| Configure generative answers node | Rates topic | 0.2.0 | Done |
+| Configure adaptive cards | Eligibility form; application form | 0.2.0 | Done |
+| Manage variables | Card output variables; flow outputs; Power Fx conversion | 0.2.0 | Done |
 
 ## 2. Integrate and extend agents in Copilot Studio (40–45 %)
 
@@ -99,7 +99,7 @@ build).
 |---|---|---|---|
 | Create a solution | LoanDesk solution | 0.1.0 | Done |
 | Add existing agents to a solution | Agents built in the solution or added to it | 0.1.0 | Done |
-| Create and use environment variables | `ldk_SearchIndexPublic`, `ldk_SearchIndexStaff` created; used by an agent from v0.2.0 | 0.1.0 | Planned |
+| Create and use environment variables | `ldk_ApproverEmail` read by the Submit Application flow | 0.1.0 | Done |
 | Implement and extend Microsoft Power Platform Pipelines | Dev to Test | 0.3.0 | Planned |
 
 ## Totals

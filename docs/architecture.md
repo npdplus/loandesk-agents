@@ -80,8 +80,8 @@ Answer rules:
 
 Solution publisher prefix: `ldk`.
 
-Table **Loan Application** (`ldk_loanapplication`). Columns marked 1 were created in v0.2.0 step 1; the rest
-are added when a later step needs them.
+Table **Loan Application** (`ldk_loanapplication`). Columns marked 1 or 3 were created in v0.2.0 steps 1 and 3; the
+rest are added when a later step needs them.
 
 | Column | Schema name | Type | Notes | Added |
 |---|---|---|---|---|
@@ -98,9 +98,9 @@ are added when a later step needs them.
 | Eligibility result | | Choice | Eligible, Not eligible, Needs review | later |
 | Credit score | | Whole number | From the mock API | later |
 | AI summary | | Multiline text | Written by a custom prompt; labelled as AI-generated | later |
-| Decision reason | | Multiline text | Required for Approved and Rejected | later |
-| Decided by | | Lookup (User) | The credit officer | later |
-| Decided on | | Date and time | | later |
+| Decision reason | `ldk_Decisionreason` | Multiline text | The approver's comment, with a reason code | 3 |
+| Decided by | `ldk_Decidedby` | Email | The approver's e-mail from the approval response (not a User lookup, to keep the flow simple) | 3 |
+| Decided on | `ldk_Decidedon` | Date and time | The approval response date | 3 |
 
 Each Currency column comes with a "(Base)" column that Dataverse adds for the base currency (THB).
 
