@@ -39,7 +39,7 @@ build).
 | Add agent flows to a topic | Apply topic calls Submit Application | 0.2.0 | Done |
 | Configure agent response formatting | Answers with lists and a `Source:` line (instructions) | 0.1.0 | Planned |
 | Add tools to a topic | Check Status topic calls the MCP tool | 0.2.0 | Planned |
-| Configure advanced agent responses with custom prompts | Plain-language explanation of the eligibility result | 0.2.0 | Planned |
+| Configure advanced agent responses with custom prompts | Plain-language explanation of the eligibility result (prompt on GPT-4.1 mini) | 0.2.0 | Done |
 | Configure advanced agent responses with custom knowledge sources | Rates topic limited to `rates-and-fees.md` | 0.2.0 | Done |
 | Configure advanced agent responses with API and Send HTTP requests | Credit Score API call | 0.2.0 | Planned |
 | Configure generative answers node | Rates topic | 0.2.0 | Done |
