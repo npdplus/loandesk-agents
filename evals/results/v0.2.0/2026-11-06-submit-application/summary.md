@@ -56,3 +56,22 @@ waits only a short time for a flow, so it must never wait for a person.
   *Needs information* when the approval fails or times out.
 - The approval *Details* lose their line breaks (the approval renders Markdown); add blank lines.
 - *Decision reason* was created as Rich text; plain text would fit the approval comment better.
+
+## Step 7: notification e-mail (same day)
+
+A parallel branch after *Respond to the agent*: **Get notify email** (*List rows* on environment variable
+`ldk_NotifyEmail`, same pattern as the approver) → **Send an email (V2)** (Office 365 Outlook). The approval
+branch does not wait for it.
+
+| Run | Application | E-mail | Result |
+|---|---|---|---|
+| 4 | LDK-000006, Wingtip Toys | Sent, but to the approver address | Bounced, 550 5.1.10 RecipientNotFound: the approver account has no mailbox |
+| 5 | LDK-000007, Wingtip Toys | "New loan application LDK-000007" to the notification mailbox | Delivered; all fields filled |
+
+Cause of run 4: the *Get notify email* action was copied from *Get approver email* and its filter still read
+`ldk_ApproverEmail`. When copying an action, check every value that names the thing it reads.
+
+Connector choice: the *Mail* connector's *Send an email notification (V3)* sends through Azure Communication
+Services and SendGrid, which may process data outside the environment's region, and needs its terms
+accepted. *Office 365 Outlook* keeps the message in Exchange Online and sends from a real mailbox, as a bank
+would require; it was chosen. The Outlook connection signs in as the mailbox owner, not as the maker.

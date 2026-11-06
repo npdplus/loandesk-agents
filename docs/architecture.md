@@ -112,7 +112,8 @@ Each Currency column comes with a "(Base)" column that Dataverse adds for the ba
 | `ldk_SearchIndexStaff` | Staff index name (`loan-policy-staff`) | 0.1.0 |
 | `ldk_CreditApiBaseUrl` | Base URL of the Credit Score API | 0.2.0 |
 | `ldk_McpServerUrl` | URL of the MCP server | 0.2.0 |
-| `ldk_ApproverEmail` | Credit officer mailbox for approvals | 0.2.0 |
+| `ldk_ApproverEmail` | Approver account for the approval step (read with *List rows* in the agent flow) | 0.2.0 |
+| `ldk_NotifyEmail` | Mailbox told about new applications | 0.2.0 |
 
 Secrets (API keys) are stored in connections or Azure Key Vault, never in environment-variable values that go
 into source control.
