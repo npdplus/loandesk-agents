@@ -1,0 +1,20 @@
+// LoanDesk Apply Agent telemetry in Application Insights (appi-loandesk-dev).
+// Run in Application Insights > Logs, KQL mode. Events land in customEvents.
+
+// 1. Event types in the last hour
+customEvents
+| where timestamp > ago(1h)
+| summarize events = count() by name
+| order by events desc
+
+// 2. How often each topic started
+customEvents
+| where timestamp > ago(1h) and name == "TopicStart"
+| extend topic = tostring(customDimensions["TopicName"])
+| summarize runs = count() by topic
+| order by runs desc
+
+// 3. Real conversations only (exclude the Copilot Studio test pane)
+customEvents
+| where customDimensions["designMode"] == "False"
+| summarize events = count() by name

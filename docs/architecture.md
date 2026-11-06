@@ -151,6 +151,8 @@ Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 10 mon
 | Azure AI Search | `srch-loandesk-dev` | Free tier, Southeast Asia; two indexes |
 | Storage account | `stloandeskdev` | Standard LRS, Hot; containers `knowledge` and `knowledge-public`; no anonymous access |
 | Microsoft Foundry | `aif-loandesk-dev`, project `loandesk-dev` | Southeast Asia; deployment `text-embedding-3-small`, Global Standard, 10,000 tokens a minute |
+| Application Insights | `appi-loandesk-dev` | Workspace-based; telemetry from the Apply Agent (v0.2.0) |
+| Log Analytics workspace | `log-loandesk-dev` | Behind Application Insights; daily cap 0.1 GB |
 | Power Platform billing plan | pay-as-you-go | Dataverse and Copilot Studio meters only |
 
 Azure Functions follow in v0.2.0.

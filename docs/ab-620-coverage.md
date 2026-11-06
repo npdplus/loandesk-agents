@@ -14,8 +14,8 @@ build).
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
 | Plan integration with enterprise systems | Dataverse, Credit Score API, MCP server | 0.2.0 | Planned |
-| Plan identity strategy | Anonymous web channel; Entra ID for the Teams staff channel | 0.1.0 | Planned |
-| Plan channels and deployment | Web test page and Teams | 0.1.0 | Planned |
+| Plan identity strategy | Anonymous web channel; Entra ID for the Teams staff channel | 0.3.0 | Planned |
+| Plan channels and deployment | Web test page and Teams | 0.3.0 | Planned |
 | Plan responsible AI strategy | AI disclosure, hand-off, content moderation, no AI decisions | 0.1.0 | Planned |
 | Evaluate security and governance considerations | Separate knowledge for customer and staff; governance table in the architecture | 0.1.0 | Planned |
 | Plan reusable agent components | Component collection *LoanDesk shared components* (Talk to a person); shared with the Front Desk agent in 0.3.0 | 0.2.0 | Done |
@@ -81,7 +81,7 @@ build).
 |---|---|---|---|
 | Configure generative answers by using Azure AI Search with Foundry | Policy answers through Foundry | 0.3.0 | Planned |
 | Configure custom prompts to use the Foundry model catalog | Summary prompt on a catalog model | 0.3.0 | Planned |
-| Monitor agents by using Application Insights | Telemetry from all agents | 0.2.0 | Planned |
+| Monitor agents by using Application Insights | Apply Agent telemetry; KQL in `monitoring/queries.kql` (standard harness only) | 0.2.0 | Done |
 
 ## 3. Test and manage agents (20–25 %)
 

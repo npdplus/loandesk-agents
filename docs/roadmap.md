@@ -39,8 +39,9 @@ Detailed plan: [v0.1.0-plan.md](v0.1.0-plan.md).
 - Reusable components shared by the agents
 - Application Insights telemetry
 - Moved from v0.1.0: topics (generative answers node, custom prompt, topic-level knowledge, variables,
-  eligibility adaptive card), the SharePoint knowledge source, the web page and Teams channels with Entra ID
-  sign-in for staff, content moderation settings
+  eligibility adaptive card)
+- Moved on to v0.3.0 (2026-11-06): channels, Entra ID sign-in, content moderation and the SharePoint knowledge
+  source, because the maker's trial cannot publish
 
 **Coverage:** 21 more, 34 of 44 (77 %).
 
@@ -57,6 +58,8 @@ Detailed plan: [v0.2.0-plan.md](v0.2.0-plan.md).
 - A Copilot connector as a knowledge source
 - Power Platform Pipelines from `LoanDesk-Dev` to `LoanDesk-Test`, with the test set run after deployment
 - Study notes for computer use, Fabric data agents and A2A
+- From v0.2.0: web and Teams channels, Entra ID sign-in for staff, content moderation review, SharePoint
+  knowledge, *Needs information* when an approval fails (needs a licence that can publish)
 
 **Coverage:** 7 more, 41 of 44 (93 %). The last 3 are study only.
 
