@@ -154,3 +154,25 @@ bank would not copy customer messages into an operations log (data minimisation)
 
 The connection string is not stored in the repository. Before each solution export, check that it is not in
 the exported agent files.
+
+## D13 — How the agents call the Credit Score API (2026-11-07)
+
+The mock API (`api/`) runs on Azure Functions **Flex Consumption** with function-key auth. Linux Consumption
+was not used: it gets no new Python versions and retires on 30 September 2028. The API returns the score
+only; the decision bands stay in the internal credit manual.
+
+| Caller | How | Key | Why |
+|---|---|---|---|
+| Staff agent (new harness) | Custom connector *LoanDesk Credit Score* as a tool | `default` function key in the connection | The officer asks for a score in chat; the agent explains it from the decision guide |
+| Apply topic (standard harness) | **Send HTTP request** with *Continue on error* | `copilot-topic` function key in Key Vault, read through secret environment variable `ldk_CreditApiKey` | Fetches the score at submission for the approval; the customer never sees it |
+
+The REST API tool was built and tested in the Apply topic first (result R1 passed), then replaced: a tool
+node in a topic has no error handling, so a 404 for a business with no credit file stopped the customer's
+application (R2). With Send HTTP request a failed call leaves the score empty and the application goes on
+(R4). The REST tool stays on the Apply Agent, set to run only when a topic calls it, as the worked example of
+that skill.
+
+Keys never go into a topic, an exported file or this repository. The topic's key is a separate function key
+so it can be revoked without breaking the staff agent's connection. Hosts and the Key Vault reference are
+current values of environment variables, removed before export. Column-level security on *Credit score*
+waits for v0.3.0, together with Entra ID sign-in.

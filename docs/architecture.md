@@ -80,8 +80,8 @@ Answer rules:
 
 Solution publisher prefix: `ldk`.
 
-Table **Loan Application** (`ldk_loanapplication`). Columns marked 1 or 3 were created in v0.2.0 steps 1 and 3; the
-rest are added when a later step needs them.
+Table **Loan Application** (`ldk_loanapplication`). Columns marked 1, 3 or 5 were created in v0.2.0 steps 1, 3
+and 5; the rest are added when a later step needs them.
 
 | Column | Schema name | Type | Notes | Added |
 |---|---|---|---|---|
@@ -96,7 +96,7 @@ rest are added when a later step needs them.
 | Years in business | `ldk_Yearsinbusiness` | Whole number | | 1 |
 | Application status | `ldk_Applicationstatus` | Choice | Submitted, Under review, Approved, Rejected, Needs information. Not named "Status", which Dataverse already uses | 1 |
 | Eligibility result | | Choice | Eligible, Not eligible, Needs review | later |
-| Credit score | | Whole number | From the mock API | later |
+| Credit score | `ldk_Creditscore` | Whole number, 300–900 | Mock score fetched by the Apply topic at submission; staff only, never shown to the customer; empty when there is no score | 5 |
 | AI summary | | Multiline text | Written by a custom prompt; labelled as AI-generated | later |
 | Decision reason | `ldk_Decisionreason` | Multiline text | The approver's comment, with a reason code | 3 |
 | Decided by | `ldk_Decidedby` | Email | The approver's e-mail from the approval response (not a User lookup, to keep the flow simple) | 3 |
@@ -110,13 +110,15 @@ Each Currency column comes with a "(Base)" column that Dataverse adds for the ba
 |---|---|---|
 | `ldk_SearchIndexPublic` | Customer index name (`loan-policy-public`) | 0.1.0 |
 | `ldk_SearchIndexStaff` | Staff index name (`loan-policy-staff`) | 0.1.0 |
-| `ldk_CreditApiBaseUrl` | Base URL of the Credit Score API | 0.2.0 |
+| `ldk_CreditApiHost` | Host name of the Credit Score function app (no `https://`); the custom connector's Host field and the Apply topic's Send HTTP request read it | 0.2.0 |
+| `ldk_CreditApiKey` | **Secret** type: points to secret `credit-api-key` in Key Vault `kv-loandesk-dev` (function key `copilot-topic`); read by the Send HTTP request | 0.2.0 |
 | `ldk_McpServerUrl` | URL of the MCP server | 0.2.0 |
 | `ldk_ApproverEmail` | Approver account for the approval step (read with *List rows* in the agent flow) | 0.2.0 |
 | `ldk_NotifyEmail` | Mailbox told about new applications | 0.2.0 |
 
 Secrets (API keys) are stored in connections or Azure Key Vault, never in environment-variable values that go
-into source control.
+into source control. Values that differ per environment (host names, e-mail addresses, the Key Vault
+reference) are set as **current values**, which are removed from the solution before it is exported.
 
 ## 7. Governance
 
@@ -153,6 +155,8 @@ Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 10 mon
 | Microsoft Foundry | `aif-loandesk-dev`, project `loandesk-dev` | Southeast Asia; deployment `text-embedding-3-small`, Global Standard, 10,000 tokens a minute |
 | Application Insights | `appi-loandesk-dev` | Workspace-based; telemetry from the Apply Agent (v0.2.0) |
 | Log Analytics workspace | `log-loandesk-dev` | Behind Application Insights; daily cap 0.1 GB |
+| Function app | `func-loandesk-credit-dev` | Credit Score API; Flex Consumption, Python 3.14, 512 MB, no always-ready instances; basic auth off; telemetry to `appi-loandesk-dev` (v0.2.0) |
+| Storage account | `stloandeskdevflex` | Host and deployment storage of the function app only, separate from the knowledge documents |
+| Managed identity | `func-loandesk-credit-dev-uami` | User-assigned; the function app's access to its storage and Application Insights |
+| Key Vault | `kv-loandesk-dev` | Azure RBAC; secret `credit-api-key` tagged `AllowedEnvironments` for `LoanDesk-Dev`; Key Vault Secrets User for Dataverse and Microsoft Copilot Studio Service (v0.2.0) |
 | Power Platform billing plan | pay-as-you-go | Dataverse and Copilot Studio meters only |
-
-Azure Functions follow in v0.2.0.

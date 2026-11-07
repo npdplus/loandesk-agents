@@ -69,6 +69,37 @@ R2 is the reason for the next part: a tool node in a topic has no error handling
 Rename, Delete and New comment), so a business with no credit file, a bad ID or an API outage would stop
 the customer's application. The Send HTTP request node has *Continue on error*.
 
+## Send HTTP request with a Key Vault secret
+
+- Key Vault `kv-loandesk-dev` (Azure RBAC, 7-day soft delete), created from Cloud Shell after registering
+  the `Microsoft.PowerPlatform` resource provider. Key Vault Secrets Officer for the maker; Key Vault
+  Secrets User for Dataverse (app ID `00000007-0000-0000-c000-000000000000`) and for *Microsoft Copilot
+  Studio Service*.
+- A separate function key `copilot-topic` was created for the topic and stored as secret `credit-api-key`
+  with the tag `AllowedEnvironments` = the `LoanDesk-Dev` environment ID. The key went from the CLI into a
+  shell variable and into the vault without being printed. (`az functionapp function keys set` redacts the
+  value in current CLI versions, so it was read back with `keys list`.)
+- Environment variable **Credit API key** (`ldk_CreditApiKey`), data type Secret, store Azure Key Vault,
+  reference as the current value. It saved at once, so the read permission was in place.
+- Apply topic: **HTTP Request** node, GET
+  `"https://" & Env.ldk_CreditApiHost & "/api/credit-score?businessId=" & EncodeUrl(Topic.businessId)`,
+  header `x-functions-key` = `Env.ldk_CreditApiKey`, timeout 10 s, response schema from a sample response
+  into `Topic.creditResponse`, error handling *Continue on error* with `Topic.httpStatus` and
+  `Topic.httpError`. Then *Set variable* `Topic.creditScore = Topic.creditResponse.score`, which feeds the
+  flow's optional `CreditScore` input. The tool node was deleted.
+
+| # | Run | Expected | Result |
+|---|---|---|---|
+| R3 | Apply with `BIZ-100002` | Score 414 in the approval, not in the customer message | Pass: LDK-000009, approval shows 414 |
+| R4a | Apply with `BIZ-000000` | Application goes on without a score | Fail: the topic went on (Send HTTP worked), but the flow's *Add a new row* failed with "property 'number_4' doesn't exist". The error branch told the customer to contact the Lending Centre |
+| R4 | Same, after the fix | Row created with an empty score; approval says "not available" | Pass: LDK-000010, Credit score empty, approval "Credit score (mock, staff only): not available" |
+
+Fix for R4a: when the optional input is empty the agent does not send it at all, and the token the designer
+inserts reads `triggerBody()['number_4']`, which fails on a missing property. The row now uses
+`triggerBody()?['number_4']` and the approval uses
+`if(empty(triggerBody()?['number_4']), 'not available', string(triggerBody()?['number_4']))`. Lesson: use
+`?[...]` for every optional flow input.
+
 ## Notes
 
 - The Azure CLI warns that `az functionapp function keys list` shows secrets. The key went into a shell

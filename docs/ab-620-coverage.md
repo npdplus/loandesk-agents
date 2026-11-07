@@ -38,10 +38,10 @@ build).
 |---|---|---|---|
 | Add agent flows to a topic | Apply topic calls Submit Application | 0.2.0 | Done |
 | Configure agent response formatting | Answers with lists and a `Source:` line (instructions) | 0.1.0 | Planned |
-| Add tools to a topic | Check Status topic calls the MCP tool | 0.2.0 | Planned |
+| Add tools to a topic | Apply topic called the Credit Score REST tool (R1, later replaced by Send HTTP); a Check Status topic will call the MCP tool (step 6) | 0.2.0 | Done |
 | Configure advanced agent responses with custom prompts | Plain-language explanation of the eligibility result (prompt on GPT-4.1 mini) | 0.2.0 | Done |
 | Configure advanced agent responses with custom knowledge sources | Rates topic limited to `rates-and-fees.md` | 0.2.0 | Done |
-| Configure advanced agent responses with API and Send HTTP requests | Credit Score API call | 0.2.0 | Planned |
+| Configure advanced agent responses with API and Send HTTP requests | Apply topic fetches the credit score with Send HTTP request: key from a Key Vault secret variable, response schema from a sample, *Continue on error* (decision D13) | 0.2.0 | Done |
 | Configure generative answers node | Rates topic | 0.2.0 | Done |
 | Configure adaptive cards | Eligibility form; application form | 0.2.0 | Done |
 | Manage variables | Card output variables; flow outputs; Power Fx conversion | 0.2.0 | Done |
@@ -62,8 +62,8 @@ build).
 |---|---|---|---|
 | Configure and monitor computer use for an agent | Notes only | — | Study |
 | Configure MCP tools | Application Status MCP server (a Microsoft MCP server, Foundry IQ, is already used in v0.1.0) | 0.2.0 | Planned |
-| Add a tool by using an existing custom connector | Credit Score API connector | 0.2.0 | Planned |
-| Add REST APIs to an agent | Credit Score API as a REST tool | 0.2.0 | Planned |
+| Add a tool by using an existing custom connector | Custom connector *LoanDesk Credit Score* as a staff agent tool; host from `ldk_CreditApiHost` | 0.2.0 | Done |
+| Add REST APIs to an agent | *LoanDesk Credit Score REST* on the Apply Agent, maker credentials, topics only | 0.2.0 | Done |
 
 ### Configure multi-agent collaboration from Copilot Studio
 
@@ -99,7 +99,7 @@ build).
 |---|---|---|---|
 | Create a solution | LoanDesk solution | 0.1.0 | Done |
 | Add existing agents to a solution | Agents built in the solution or added to it | 0.1.0 | Done |
-| Create and use environment variables | `ldk_ApproverEmail` read by the Submit Application flow | 0.1.0 | Done |
+| Create and use environment variables | `ldk_ApproverEmail` read by the Submit Application flow; `ldk_CreditApiHost` in a custom connector and a topic; secret `ldk_CreditApiKey` from Key Vault | 0.1.0 | Done |
 | Implement and extend Microsoft Power Platform Pipelines | Dev to Test | 0.3.0 | Planned |
 
 ## Totals
