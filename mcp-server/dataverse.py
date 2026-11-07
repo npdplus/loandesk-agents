@@ -15,6 +15,7 @@ from status import APPLICATION_NUMBER, Application
 
 ENTITY_SET = "ldk_loanapplications"
 COLUMNS = "ldk_applicationnumber,ldk_contactemail,ldk_applicationstatus,modifiedon"
+STATUS_LABEL = "ldk_applicationstatus@OData.Community.Display.V1.FormattedValue"
 
 
 class TokenCredential(Protocol):
@@ -48,6 +49,7 @@ class DataverseStore:
                 "Accept": "application/json",
                 "OData-MaxVersion": "4.0",
                 "OData-Version": "4.0",
+                "Prefer": 'odata.include-annotations="OData.Community.Display.V1.FormattedValue"',
             },
         )
         with urlopen(request, timeout=self._timeout) as response:  # noqa: S310 - https URL from settings
@@ -59,6 +61,6 @@ class DataverseStore:
         return Application(
             number=row.get("ldk_applicationnumber") or number,
             contact_email=row.get("ldk_contactemail") or "",
-            status_code=row.get("ldk_applicationstatus"),
+            status=row.get(STATUS_LABEL) or "",
             modified_on=row.get("modifiedon") or "",
         )

@@ -14,15 +14,8 @@ from typing import Protocol
 APPLICATION_NUMBER = re.compile(r"^LDK-\d{6}$")
 _EMAIL = re.compile(r"^[^@\s]{1,64}@[^@\s]{1,255}$")
 
-# Choice values of ldk_Applicationstatus in solution LoanDesk.
-STATUS_LABELS = {
-    852190000: "Submitted",
-    852190001: "Under review",
-    852190002: "Approved",
-    852190003: "Rejected",
-    852190004: "Needs information",
-}
-
+# Labels of the ldk_Applicationstatus choice. Dataverse returns the label with the row (formatted value), so
+# the code does not depend on the numeric choice values.
 NEXT_STEPS = {
     "Submitted": "A credit officer will review it and decide within 5 business days after all required "
     "documents arrive.",
@@ -45,7 +38,7 @@ UNAVAILABLE = "The status service is not available right now. Please try again l
 class Application:
     number: str
     contact_email: str
-    status_code: int | None
+    status: str
     modified_on: str
 
 
@@ -76,7 +69,7 @@ def look_up_status(store: ApplicationStore, raw_number: object, raw_email: objec
     if application is None or application.contact_email.strip().casefold() != email.casefold():
         return _not_found(NO_MATCH)
 
-    status = STATUS_LABELS.get(application.status_code or -1, "Unknown")
+    status = application.status if application.status in NEXT_STEPS else "Unknown"
     return {
         "found": True,
         "applicationNumber": application.number,

@@ -21,7 +21,7 @@ import status  # noqa: E402
 APP = status.Application(
     number="LDK-000004",
     contact_email="Owner@Contoso-Coffee.example",
-    status_code=852190002,
+    status="Approved",
     modified_on="2026-11-06T04:24:10Z",
 )
 
@@ -64,15 +64,25 @@ class LookUpTests(unittest.TestCase):
                 self.assertFalse(status.look_up_status(store, number, email)["found"])
         self.assertEqual(store.calls, [])
 
-    def test_every_status_has_a_label_and_next_step(self) -> None:
-        for code, label in status.STATUS_LABELS.items():
+    def test_every_status_has_a_next_step(self) -> None:
+        labels = ["Submitted", "Under review", "Approved", "Rejected", "Needs information"]
+        self.assertEqual(sorted(status.NEXT_STEPS), sorted(labels))
+        for label in labels:
             result = status.look_up_status(
-                FakeStore(status.Application("LDK-000001", "a@b.example", code, "2026-11-01T00:00:00Z")),
+                FakeStore(status.Application("LDK-000001", "a@b.example", label, "2026-11-01T00:00:00Z")),
                 "LDK-000001",
                 "a@b.example",
             )
             self.assertEqual(result["status"], label)
             self.assertEqual(result["nextStep"], status.NEXT_STEPS[label])
+
+    def test_unexpected_label_is_unknown(self) -> None:
+        result = status.look_up_status(
+            FakeStore(status.Application("LDK-000001", "a@b.example", "", "2026-11-01T00:00:00Z")),
+            "LDK-000001",
+            "a@b.example",
+        )
+        self.assertEqual(result["status"], "Unknown")
 
 
 class DataverseStoreTests(unittest.TestCase):
@@ -84,7 +94,8 @@ class DataverseStoreTests(unittest.TestCase):
     def test_builds_a_read_only_filtered_query(self) -> None:
         body = io.BytesIO(json.dumps({"value": [{
             "ldk_applicationnumber": "LDK-000004", "ldk_contactemail": "x@y.example",
-            "ldk_applicationstatus": 852190000, "modifiedon": "2026-11-05T01:02:03Z"}]}).encode())
+            "ldk_applicationstatus": 123, dataverse.STATUS_LABEL: "Submitted",
+            "modifiedon": "2026-11-05T01:02:03Z"}]}).encode())
         with mock.patch.object(dataverse, "urlopen", return_value=body) as opened:
             found = self._store().find_by_number("LDK-000004")
         request = opened.call_args.args[0]
@@ -93,7 +104,8 @@ class DataverseStoreTests(unittest.TestCase):
         self.assertTrue(url.startswith("https://org.example.crm5.dynamics.com/api/data/v9.2/ldk_loanapplications?"))
         self.assertIn("$filter=ldk_applicationnumber eq 'LDK-000004'", url)
         self.assertEqual(request.get_header("Authorization"), "Bearer t0ken")
-        self.assertEqual(found, status.Application("LDK-000004", "x@y.example", 852190000, "2026-11-05T01:02:03Z"))
+        self.assertIn("FormattedValue", request.get_header("Prefer"))
+        self.assertEqual(found, status.Application("LDK-000004", "x@y.example", "Submitted", "2026-11-05T01:02:03Z"))
 
     def test_no_row_or_bad_number_is_none(self) -> None:
         with mock.patch.object(dataverse, "urlopen", return_value=io.BytesIO(b'{"value": []}')):
