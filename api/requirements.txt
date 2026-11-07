@@ -1,0 +1,2 @@
+# Installed by the remote build on Azure. Do not pin azure-functions-worker; the platform manages it.
+azure-functions>=1.21,<2
