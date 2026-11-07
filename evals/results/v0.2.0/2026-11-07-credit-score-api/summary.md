@@ -46,6 +46,29 @@ used 9 credits.
 C1 listed D02 and D03 as the decline codes; for a score of 600–699 that fails only on DSCR, D03 is the one
 that applies. A small wording issue, not a wrong figure.
 
+## REST tool on the Apply Agent
+
+REST API tool **LoanDesk Credit Score REST** (operation *Get credit score REST*), created in Copilot Studio
+from a local copy of the OpenAPI file with the real host (not committed), solution LoanDesk, API key auth
+(`x-functions-key`, header), connection *LoanDesk Credit Score REST - maker*. Tool settings: only when
+referenced by topics or agents; do not ask the end user; maker-provided credentials; don't respond.
+
+The Apply topic calls it between the application card and the Submit Application flow: input
+`Topic.businessId`; outputs `score` to `Topic.creditScore` and `businessId` to `Topic.creditBusinessId`
+(so the card's variable is not overwritten). New Dataverse column **Credit score** (`ldk_Creditscore`,
+whole number 300–900). The flow has a ninth, optional input `CreditScore` (shown in the topic under
+*Advanced inputs*), writes it to the row and adds "Credit score (mock, staff only)" to the approval
+details.
+
+| # | Run | Expected | Result |
+|---|---|---|---|
+| R1 | Apply with `BIZ-100009` | Customer message without a score; row and approval show 659 | Pass: LDK-000008, Credit score 659, approval details show 659 |
+| R2 | Apply with `BIZ-000000` | Shows whether a 404 stops the application | Topic stopped: "The connector 'LoanDesk Credit Score REST' returned an HTTP error with code 404 … ConnectorRequestFailure"; no row created |
+
+R2 is the reason for the next part: a tool node in a topic has no error handling (its menu has only
+Rename, Delete and New comment), so a business with no credit file, a bad ID or an API outage would stop
+the customer's application. The Send HTTP request node has *Continue on error*.
+
 ## Notes
 
 - The Azure CLI warns that `az functionapp function keys list` shows secrets. The key went into a shell
