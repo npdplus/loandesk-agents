@@ -16,10 +16,10 @@ build).
 | Plan integration with enterprise systems | Dataverse through an agent flow, the Credit Score API through a custom connector, a REST tool and Send HTTP, and Dataverse through an MCP server with a managed identity (decisions D13, D14) | 0.2.0 | Done |
 | Plan identity strategy | Anonymous web channel; Entra ID for the Teams staff channel | 0.3.0 | Planned |
 | Plan channels and deployment | Web test page and Teams | 0.3.0 | Planned |
-| Plan responsible AI strategy | AI disclosure, hand-off, content moderation, no AI decisions | 0.1.0 | Planned |
-| Evaluate security and governance considerations | Separate knowledge for customer and staff; governance table in the architecture | 0.1.0 | Planned |
+| Plan responsible AI strategy | AI disclosure, hand-off, no AI decisions, no internal content for customers (decision D1); content moderation review in 0.3.0 | 0.1.0 | Done |
+| Evaluate security and governance considerations | Separate knowledge for customer and staff; governance table in the architecture; keys in connections and Key Vault, least-privilege role for the MCP server (D13, D14) | 0.1.0 | Done |
 | Plan reusable agent components | Component collection *LoanDesk shared components* (Talk to a person); shared with the Front Desk agent in 0.3.0 | 0.2.0 | Done |
-| Design agents for internal or external audiences | Customer agent and staff agent | 0.1.0 | Planned |
+| Design agents for internal or external audiences | Customer agent and staff agent, each with its own knowledge and tools | 0.1.0 | Done |
 
 ### Create and monitor agent flows in Copilot Studio
 
@@ -37,7 +37,7 @@ build).
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
 | Add agent flows to a topic | Apply topic calls Submit Application | 0.2.0 | Done |
-| Configure agent response formatting | Answers with lists and a `Source:` line (instructions) | 0.1.0 | Planned |
+| Configure agent response formatting | Answers with lists and a `Source:` line (instructions) | 0.1.0 | Done |
 | Add tools to a topic | Apply topic called the Credit Score REST tool (R1, later replaced by Send HTTP) | 0.2.0 | Done |
 | Configure advanced agent responses with custom prompts | Plain-language explanation of the eligibility result (prompt on GPT-4.1 mini) | 0.2.0 | Done |
 | Configure advanced agent responses with custom knowledge sources | Rates topic limited to `rates-and-fees.md` | 0.2.0 | Done |
@@ -53,7 +53,7 @@ build).
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
 | Connect to Copilot connectors | A Copilot connector as an extra knowledge source | 0.3.0 | Planned |
-| Connect to Microsoft Power Platform connectors | Dataverse or Outlook connector | 0.2.0 | Planned |
+| Connect to Microsoft Power Platform connectors | Dataverse, Approvals and Office 365 Outlook connectors in the Submit Application flow | 0.2.0 | Done |
 | Connect to Azure AI Search | Foundry IQ knowledge bases over `loan-policy-public` and `loan-policy-staff`, through the Foundry IQ MCP tool (customer agent connected 2026-11-05; decision D8) | 0.1.0 | Done |
 
 ### Add tools to agents
@@ -106,10 +106,11 @@ build).
 
 | Version | New skill lines | Running total | Share of 44 |
 |---|---|---|---|
-| 0.1.0 | 13 | 13 | 30 % |
-| 0.2.0 | 21 | 34 | 77 % |
-| 0.3.0 | 7 | 41 | 93 % |
+| 0.1.0 | 11 | 11 | 25 % |
+| 0.2.0 | 21 | 32 | 73 % |
+| 0.3.0 | 9 | 41 | 93 % |
 | Study only | 3 | 44 | 100 % read |
 
-Re-scoped 2026-11-05: five topic skills moved from v0.1.0 to v0.2.0 (see the v0.1.0 plan). The total by
-v0.2.0 is unchanged.
+Re-scoped 2026-11-05: five topic skills moved from v0.1.0 to v0.2.0 (see the v0.1.0 plan). Re-scoped
+2026-11-06: identity and channel planning moved to v0.3.0 with step 10, because the trial cannot publish.
+Status checked against the repository at the v0.2.0 release (2026-11-08): every 0.1.0 and 0.2.0 line is Done.

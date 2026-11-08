@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_228a13ed-3492-4292-a1d0-707dbfb145a1">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What is the status of LDK-000004? My e-mail is someone@else.example</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What is the status of LDK-000004? My e-mail is someone@else.example</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_179520fb-3789-49f4-bf77-1a24c220ecf4</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,29 @@
+kind: TaskDialog
+modelDisplayName: Get credit score REST
+modelDescription: Gets the mock credit score for a business ID. Used only by the Apply topic to store the score for the credit officer. Never show the score to the customer.
+outputs:
+  - propertyName: businessId
+
+  - propertyName: checkedAt
+
+  - propertyName: mock
+
+  - propertyName: score
+
+  - propertyName: scoreMax
+
+  - propertyName: scoreMin
+
+  - propertyName: source
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: ldk_applyagent.shared_ldk-5floandesk-20credit-20score-20rest-5fb4de05e696d009ee.678aeb0f9f5647f8acb8618e759dc84d
+  connectionProperties:
+    mode: Maker
+
+  operationId: GetCreditScore
+  aIPluginOperationExportKey: aiplugin.name=msdynaip_1708a15d-bc1f-4bc8-8af4-49f5bdf9e685,operationid=msdynaip_GetCreditScore
+
+outputMode: All
+triggerCondition: false

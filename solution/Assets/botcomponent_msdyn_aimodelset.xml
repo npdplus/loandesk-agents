@@ -1,0 +1,5 @@
+<botcomponent_msdyn_aimodelset>
+  <botcomponent_msdyn_aimodel botcomponentid.schemaname="ldk_applyagent.topic.Checkeligibility" msdyn_aimodelid.msdyn_aimodelid="8206b4ff-eb94-4005-9a0c-4458b63515fc">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_msdyn_aimodel>
+</botcomponent_msdyn_aimodelset>

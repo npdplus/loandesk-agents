@@ -1,11 +1,11 @@
-<ImportExportXml version="9.2.26102.127" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26102.127" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26102.00127">
+<ImportExportXml version="9.2.26103.153" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26103.153" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26103.00153">
   <SolutionManifest>
     <UniqueName>LoanDesk</UniqueName>
     <LocalizedNames>
       <LocalizedName description="LoanDesk" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>0.1.1.0</Version>
+    <Version>0.2.0.1</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>npdpluslabs</UniqueName>
@@ -76,7 +76,22 @@
         </Address>
       </Addresses>
     </Publisher>
-    <RootComponents />
-    <MissingDependencies />
+    <RootComponents>
+      <RootComponent type="1" schemaName="ldk_loanapplication" behavior="0" />
+      <RootComponent type="20" id="{ee87880a-b7da-f111-84ea-002248ef08b6}" behavior="0" />
+      <RootComponent type="29" id="{ddc692ea-7fd9-f111-84ea-e4fb1effccdd}" behavior="0" />
+      <RootComponent type="372" id="{d638b994-3d9f-4ce8-9255-2b36a8064add}" schemaName="ldk_5Floandesk-20application-20status" behavior="0" />
+      <RootComponent type="372" id="{b8651645-0f52-4c52-8ce1-351b721c6118}" schemaName="ldk_5Floandesk-20credit-20score" behavior="0" />
+      <RootComponent type="372" id="{7cac0216-4f7b-4b48-9630-477811d77619}" schemaName="ldk_5Floandesk-20credit-20score-20rest" behavior="0" />
+      <RootComponent type="401" id="{8206b4ff-eb94-4005-9a0c-4458b63515fc}" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Submit Application" id="{ddc692ea-7fd9-f111-84ea-e4fb1effccdd}" />
+      </MissingDependency>
+    </MissingDependencies>
   </SolutionManifest>
 </ImportExportXml>

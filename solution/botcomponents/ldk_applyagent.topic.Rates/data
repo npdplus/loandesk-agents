@@ -1,0 +1,23 @@
+kind: AdaptiveDialog
+modelDescription: "Answers questions about interest rates and fees for the SME Working Capital Loan: the rate for an amount and term, the front-end fee, early repayment and late payment."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: G7Ku0D
+      userInput: =System.Activity.Text
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: SearchSpecificFiles
+          files:
+            - ldk_applyagent.file.rates-and-fees.md_h4D
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+
+      applyModelKnowledgeSetting: false
+
+inputType: {}
+outputType: {}

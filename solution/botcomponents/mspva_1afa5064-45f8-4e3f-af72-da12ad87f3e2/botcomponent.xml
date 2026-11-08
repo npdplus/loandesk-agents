@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_1afa5064-45f8-4e3f-af72-da12ad87f3e2">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>How many months of bank statements do I need to send?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>How many months of bank statements do I need to send?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_d90a7e2e-b5ab-43ad-8f6c-471648683717</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

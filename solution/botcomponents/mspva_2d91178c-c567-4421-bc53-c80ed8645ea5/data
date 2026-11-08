@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I can't share internal credit scoring criteria. A credit officer reviews each application. I can connect you with a person.
+    input: What credit score do I need to get approved?
+
+extensionData:
+  displayOrder: "1794117439523"

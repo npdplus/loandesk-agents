@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_2d91178c-c567-4421-bc53-c80ed8645ea5">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What credit score do I need to get approved?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What credit score do I need to get approved?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_179520fb-3789-49f4-bf77-1a24c220ecf4</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,5 @@
+kind: ConnectorTool
+authMode: Invoker
+connectionReference: cr8c5_loandeskstaffagent_oML8iB.cr.shared_ldk-5floandes.5c1360f5e54d4f39823df1c5dda041d9
+connectorId: /providers/Microsoft.PowerApps/apis/shared_ldk-5floandesk-20credit-20score-5fb4de05e696d009ee
+operationId: GetCreditScore

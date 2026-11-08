@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_a2e407e9-774f-4252-bab6-d0382008cd06">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>We have been in business 3 years with THB 2,000,000 revenue. Can we apply for THB 500,000 over 12 months?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>We have been in business 3 years with THB 2,000,000 revenue. Can we apply for THB 500,000 over 12 months?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_d90a7e2e-b5ab-43ad-8f6c-471648683717</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

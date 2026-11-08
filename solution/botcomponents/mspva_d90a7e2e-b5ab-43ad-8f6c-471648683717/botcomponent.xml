@@ -1,0 +1,12 @@
+<botcomponent schemaname="mspva_d90a7e2e-b5ab-43ad-8f6c-471648683717">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>v0.1.0 customer</description>
+  <iscustomizable>0</iscustomizable>
+  <name>v0.1.0 customer</name>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

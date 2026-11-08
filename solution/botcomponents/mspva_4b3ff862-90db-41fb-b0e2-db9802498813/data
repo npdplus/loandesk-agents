@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: Not yet. The business must have operated for at least 2 years.
+    input: My business is 18 months old. Can I apply?
+
+extensionData:
+  displayOrder: "1793848317298"

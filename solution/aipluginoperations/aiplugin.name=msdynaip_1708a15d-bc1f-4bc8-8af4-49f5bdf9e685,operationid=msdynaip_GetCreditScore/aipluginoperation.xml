@@ -1,0 +1,11 @@
+<aipluginoperation aiplugin.name="msdynaip_1708a15d-bc1f-4bc8-8af4-49f5bdf9e685" operationid="msdynaip_GetCreditScore">
+  <aipluginoperationexportkey>aiplugin.name=msdynaip_1708a15d-bc1f-4bc8-8af4-49f5bdf9e685,operationid=msdynaip_GetCreditScore</aipluginoperationexportkey>
+  <description>Gets the mock credit score for a business ID. Used only by the Apply topic to store the score for the credit officer. Never show the score to the customer.</description>
+  <isconsequential>0</isconsequential>
+  <iscustomizable>1</iscustomizable>
+  <name>Get credit score REST</name>
+  <referencedoperationid>GetCreditScore</referencedoperationid>
+  <responsesemantics>{"cardType":"default","data_path":"","properties":{},"defaultValues":{}}</responsesemantics>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</aipluginoperation>

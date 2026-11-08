@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="ldk_CreditApiKey">
+  <description default="Function key for the Apply topic's Send HTTP request. Stored in Azure Key Vault.">
+    <label description="Function key for the Apply topic's Send HTTP request. Stored in Azure Key Vault." languagecode="1033" />
+  </description>
+  <displayname default="Credit API key">
+    <label description="Credit API key" languagecode="1033" />
+  </displayname>
+  <introducedversion>0.1.1.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000005</type>
+</environmentvariabledefinition>

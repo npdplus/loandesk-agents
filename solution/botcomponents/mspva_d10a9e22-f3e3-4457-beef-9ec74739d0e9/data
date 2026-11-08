@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I can't approve a loan. A credit officer reviews every application and makes the decision. I can connect you with a person.
+    input: Can you approve my loan now?
+
+extensionData:
+  displayOrder: "1793848317289"

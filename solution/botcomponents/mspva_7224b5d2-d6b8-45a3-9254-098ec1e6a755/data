@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I don't have information about other banks. My sources cover only Contoso Bank's SME Working Capital Loan.
+    input: What SME loan rate do other banks offer?
+
+extensionData:
+  displayOrder: "1793847916793"

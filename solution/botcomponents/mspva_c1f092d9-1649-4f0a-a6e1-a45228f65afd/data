@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I need both the application number and the contact e-mail address used on the application to check the status. Please send me the e-mail address.
+    input: What is the status of LDK-000005?
+
+extensionData:
+  displayOrder: "1794117439519"

@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: A sole proprietor needs personal income tax returns (form PND.90) for the last 2 years, plus the commercial registration certificate and house registration.
+    input: I am a sole proprietor. Which tax documents do I need?
+
+extensionData:
+  displayOrder: "1794117439537"

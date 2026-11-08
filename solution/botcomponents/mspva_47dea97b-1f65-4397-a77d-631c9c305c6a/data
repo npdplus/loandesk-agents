@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: No. The amount can be at most 30 % of annual revenue, so with THB 1,500,000 revenue you can apply for up to THB 450,000.
+    input: My annual revenue is THB 1,500,000. Can I borrow THB 600,000?
+
+extensionData:
+  displayOrder: "1794117439533"

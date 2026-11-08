@@ -1,0 +1,12 @@
+<botcomponent schemaname="ldk_applyagent.file.rates-and-fees.md_h4D">
+  <componenttype>14</componenttype>
+  <description>This knowledge source searches information contained in rates-and-fees.md</description>
+  <filedata mimetype="application/octet-stream">rates-and-fees.md</filedata>
+  <iscustomizable>0</iscustomizable>
+  <name>rates-and-fees.md</name>
+  <parentbotid>
+    <schemaname>ldk_applyagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

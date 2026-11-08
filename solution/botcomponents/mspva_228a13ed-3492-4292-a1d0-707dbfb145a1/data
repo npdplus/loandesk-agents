@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: No application matches that application number and e-mail address. Please check both, or contact the Lending Centre.
+    input: What is the status of LDK-000004? My e-mail is someone@else.example
+
+extensionData:
+  displayOrder: "1794117439520"

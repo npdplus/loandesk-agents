@@ -1,0 +1,5 @@
+kind: McpTool
+authMode: Invoker
+connectionReference: cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_ldk-5floandes.aec3c289b16a4096bcc8f5905d3290ce
+connectorId: /providers/Microsoft.PowerApps/apis/shared_ldk-5floandesk-20application-20status-5fb4de05e696d009ee
+operationId: InvokeServer

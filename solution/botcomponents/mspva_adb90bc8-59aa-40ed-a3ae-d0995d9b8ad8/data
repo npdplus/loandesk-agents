@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: A credit officer decides within 5 business days after all the required documents arrive.
+    input: How long does a decision take?
+
+extensionData:
+  displayOrder: "1794117439536"

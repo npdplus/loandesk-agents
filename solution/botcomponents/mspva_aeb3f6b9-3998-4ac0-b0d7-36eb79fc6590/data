@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I don't have that information. I can help with questions about the SME Working Capital Loan.
+    input: What will the weather be in Bangkok tomorrow?
+
+extensionData:
+  displayOrder: "1793848317290"

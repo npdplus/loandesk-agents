@@ -2,7 +2,16 @@
   <botcomponent_connectionreference botcomponentid.schemaname="cr8c5_loandeskcustomeragent_lnC1dD.tool.Azure-FoundryIQ-FoundryIQKnowledgeRetrievalMCP_AM7" connectionreferenceid.connectionreferencelogicalname="cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_azureaisearch.bec50b21da7c4d81bc2b3e0c9eedf4b7">
     <iscustomizable>1</iscustomizable>
   </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr8c5_loandeskcustomeragent_lnC1dD.tool.LoanDeskApplicationStatus_RcG" connectionreferenceid.connectionreferencelogicalname="cr8c5_loandeskcustomeragent_lnC1dD.cr.shared_ldk-5floandes.aec3c289b16a4096bcc8f5905d3290ce">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
   <botcomponent_connectionreference botcomponentid.schemaname="cr8c5_loandeskstaffagent_oML8iB.tool.Azure-FoundryIQ-FoundryIQKnowledgeRetrievalMCP_x1t" connectionreferenceid.connectionreferencelogicalname="cr8c5_loandeskstaffagent_oML8iB.cr.shared_azureaisearchfoundryiq.bec50b21da7c4d81bc2b3e0c9eedf4b7">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr8c5_loandeskstaffagent_oML8iB.tool.Getcreditscore_HKn" connectionreferenceid.connectionreferencelogicalname="cr8c5_loandeskstaffagent_oML8iB.cr.shared_ldk-5floandes.5c1360f5e54d4f39823df1c5dda041d9">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="ldk_applyagent.action.LoanDeskCreditScoreREST-LoanDeskCreditScoreREST" connectionreferenceid.connectionreferencelogicalname="ldk_applyagent.shared_ldk-5floandesk-20credit-20score-20rest-5fb4de05e696d009ee.678aeb0f9f5647f8acb8618e759dc84d">
     <iscustomizable>1</iscustomizable>
   </botcomponent_connectionreference>
 </botcomponent_connectionreferenceset>

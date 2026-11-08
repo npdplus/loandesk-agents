@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I can't give investment advice. I can only help with the SME Working Capital Loan, or connect you with a person.
+    input: Should I buy gold this month?
+
+extensionData:
+  displayOrder: "1794117439529"

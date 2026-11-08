@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_b0c4c833-8f70-4485-b4ec-d3a9ff8041d7">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>When do I need a second approval from a senior officer?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>When do I need a second approval from a senior officer?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_1f5dee9f-8b29-4482-9d61-f131ba7c7a1f</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

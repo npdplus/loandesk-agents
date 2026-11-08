@@ -1,0 +1,4 @@
+kind: EvaluationSet
+graders:
+  - kind: CompareMeaningGrader
+    threshold: 0.7

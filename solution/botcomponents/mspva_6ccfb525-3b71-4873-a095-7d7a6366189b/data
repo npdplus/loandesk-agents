@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: I don't have information about home loans. I can help with the SME Working Capital Loan, or connect you with a person.
+    input: What is your interest rate for a home loan?
+
+extensionData:
+  displayOrder: "1793848317292"

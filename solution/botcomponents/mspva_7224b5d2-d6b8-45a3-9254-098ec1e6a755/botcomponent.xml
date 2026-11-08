@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_7224b5d2-d6b8-45a3-9254-098ec1e6a755">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What SME loan rate do other banks offer?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What SME loan rate do other banks offer?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_960b1620-9079-4a6f-98d9-d79049d7a423</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -7,10 +7,12 @@ A small business asks about a working-capital loan, checks whether it qualifies,
 answer from the bank's policy documents (RAG), pre-screen the application, and hand it to a credit officer.
 **A person makes every decision; the AI never approves a loan.**
 
-> **Status:** v0.1.0 done (2026-11-05). Two agents, one per audience, answer from their own Azure AI Search
-> index through a Foundry IQ knowledge base and name their sources; internal content reaches only the staff
-> agent. The 30-question test set passes in Copilot Studio Evaluate. Next: v0.2.0. See
-> [the roadmap](docs/roadmap.md) and [the v0.1.0 plan](docs/v0.1.0-plan.md).
+> **Status:** v0.2.0 done (2026-11-08). A business checks eligibility and applies through adaptive cards; an
+> agent flow saves the application in Dataverse and a credit officer approves or rejects it. The staff agent
+> looks up a mock credit score through a custom connector; the customer agent checks an application's status
+> through our own MCP server, only with the application number and contact e-mail. Evaluate: staff 8/8,
+> customer 29/29, every v0.1.0 question still passing. Next: v0.3.0. See [the roadmap](docs/roadmap.md) and
+> [the v0.2.0 plan](docs/v0.2.0-plan.md).
 >
 > Everything here is fictional: Contoso Bank, its products, rates, policies, customers and applications.
 > This is a learning and portfolio project, not a banking product.

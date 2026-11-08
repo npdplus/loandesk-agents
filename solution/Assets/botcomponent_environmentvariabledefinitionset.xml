@@ -1,0 +1,8 @@
+<botcomponent_environmentvariabledefinitionset>
+  <botcomponent_environmentvariabledefinition botcomponentid.schemaname="ldk_applyagent.topic.Apply" environmentvariabledefinitionid.schemaname="ldk_CreditApiHost">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_environmentvariabledefinition>
+  <botcomponent_environmentvariabledefinition botcomponentid.schemaname="ldk_applyagent.topic.Apply" environmentvariabledefinitionid.schemaname="ldk_CreditApiKey">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_environmentvariabledefinition>
+</botcomponent_environmentvariabledefinitionset>

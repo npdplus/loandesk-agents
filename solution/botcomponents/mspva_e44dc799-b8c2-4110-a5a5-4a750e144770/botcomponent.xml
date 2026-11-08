@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_e44dc799-b8c2-4110-a5a5-4a750e144770">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What is the credit score for BIZ-000000?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What is the credit score for BIZ-000000?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_1f5dee9f-8b29-4482-9d61-f131ba7c7a1f</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

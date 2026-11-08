@@ -1,0 +1,13 @@
+kind: AdaptiveDialog
+modelDescription: Connects the customer with a person at the Lending Centre. Use when the customer asks for a person, an officer, a human or staff.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SendActivity
+      id: sendActivity_hNWX0K
+      activity: You can reach a person at the Contoso Bank Lending Centre (fictional) at lending@contoso-bank.example. They reply within 1 business day, Monday to Friday, 08:30 to 17:00.
+
+inputType: {}
+outputType: {}

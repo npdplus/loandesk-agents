@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_b5716b58-c74c-4656-996f-adb137fdebe9">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What is the interest rate for THB 2,000,000 over 24 months?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What is the interest rate for THB 2,000,000 over 24 months?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_d90a7e2e-b5ab-43ad-8f6c-471648683717</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_c46115b9-5078-46ee-9951-47570b43f1d1">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What is the credit score for BIZ-100009, and what does the decision guide say for that score?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What is the credit score for BIZ-100009, and what does the decision guide say for that score?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_1f5dee9f-8b29-4482-9d61-f131ba7c7a1f</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
