@@ -176,3 +176,21 @@ Keys never go into a topic, an exported file or this repository. The topic's key
 so it can be revoked without breaking the staff agent's connection. Hosts and the Key Vault reference are
 current values of environment variables, removed before export. Column-level security on *Credit score*
 waits for v0.3.0, together with Entra ID sign-in.
+
+## D14 — Application status for customers through an MCP server (2026-11-08)
+
+The customer agent checks an application's status with its own MCP server, `func-loandesk-mcp-dev`, built
+on the Azure Functions MCP extension (Python). The customer agent has no sign-in yet (v0.3.0), and
+application numbers run in sequence, so:
+
+- The tool needs the application number **and** the contact e-mail address from the application. A wrong
+  e-mail and an unknown number get the same answer, so trying numbers reveals nothing.
+- The answer holds only the status, the date it last changed and the next step. Score, amount, decision
+  reason, business name and the decider stay out.
+- The function reads Dataverse with its own user-assigned managed identity, an application user whose only
+  role, *LoanDesk Status Reader*, can read Loan Application rows and nothing else. No client secret exists.
+- The status label comes from Dataverse (formatted value), not from choice numbers in the code.
+- The MCP endpoint takes the `mcp_extension` system key, stored only in the Copilot Studio connection.
+
+Each function app has its own storage account and identity, so the credit API and the MCP server cannot
+use each other's access.

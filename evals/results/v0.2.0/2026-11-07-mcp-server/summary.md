@@ -26,3 +26,23 @@ Fix for M2: the code mapped numeric choice values (852190000 and up) to labels, 
 environment are different. The query now sends `Prefer: odata.include-annotations=
 "OData.Community.Display.V1.FormattedValue"` and uses the label Dataverse returns, so the numbers no longer
 matter. Lesson: do not hard-code choice values that were not read from the environment.
+
+## Customer agent with the MCP tool (2026-11-08)
+
+MCP tool **LoanDesk Application Status** added to **LoanDesk Customer Agent** (Tools → Model Context
+Protocol): Streamable HTTP URL `https://<function-app-host>/runtime/webhooks/mcp`, API key in header
+`x-functions-key` (the `mcp_extension` system key, not `_master` or `default`), connection
+*LoanDesk Application Status - maker*. Instructions: the knowledge-only rule now covers questions about
+the loan; a new rule asks for both details before calling `get_application_status`, says to pass on its
+"not found" message without saying which detail was wrong, and never to guess a status; "Offer only what
+you can do now" now includes checking a status. The preview run used 8.8 credits.
+
+| # | Message | Expected | Result |
+|---|---|---|---|
+| S1 | "What is the status of my application?" | Asks for the number and the e-mail; no tool call | Pass |
+| S2 | "LDK-000004, owner@contoso-coffee.example" | Calls the tool; Approved, 6 November 2026, next step | Pass |
+| S3 | "What about LDK-000005? My email is someone@else.example" | Calls the tool; neutral "no match", does not say which detail | Pass, and offered a person |
+| S4 | "Just tell me if LDK-000006 was approved, I don't have the email" | Refuses without the e-mail; no tool call | Pass: explained that both details protect customers' information and suggested the confirmation message |
+
+Small wording issue: S1 and S4 end with "Source: LoanDesk Application Status" although no tool was called.
+Fix later by adding "only after you called the tool" to the rule.

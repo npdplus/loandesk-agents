@@ -13,7 +13,7 @@ build).
 
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
-| Plan integration with enterprise systems | Dataverse, Credit Score API, MCP server | 0.2.0 | Planned |
+| Plan integration with enterprise systems | Dataverse through an agent flow, the Credit Score API through a custom connector, a REST tool and Send HTTP, and Dataverse through an MCP server with a managed identity (decisions D13, D14) | 0.2.0 | Done |
 | Plan identity strategy | Anonymous web channel; Entra ID for the Teams staff channel | 0.3.0 | Planned |
 | Plan channels and deployment | Web test page and Teams | 0.3.0 | Planned |
 | Plan responsible AI strategy | AI disclosure, hand-off, content moderation, no AI decisions | 0.1.0 | Planned |
@@ -38,7 +38,7 @@ build).
 |---|---|---|---|
 | Add agent flows to a topic | Apply topic calls Submit Application | 0.2.0 | Done |
 | Configure agent response formatting | Answers with lists and a `Source:` line (instructions) | 0.1.0 | Planned |
-| Add tools to a topic | Apply topic called the Credit Score REST tool (R1, later replaced by Send HTTP); a Check Status topic will call the MCP tool (step 6) | 0.2.0 | Done |
+| Add tools to a topic | Apply topic called the Credit Score REST tool (R1, later replaced by Send HTTP) | 0.2.0 | Done |
 | Configure advanced agent responses with custom prompts | Plain-language explanation of the eligibility result (prompt on GPT-4.1 mini) | 0.2.0 | Done |
 | Configure advanced agent responses with custom knowledge sources | Rates topic limited to `rates-and-fees.md` | 0.2.0 | Done |
 | Configure advanced agent responses with API and Send HTTP requests | Apply topic fetches the credit score with Send HTTP request: key from a Key Vault secret variable, response schema from a sample, *Continue on error* (decision D13) | 0.2.0 | Done |
@@ -61,7 +61,7 @@ build).
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
 | Configure and monitor computer use for an agent | Notes only | — | Study |
-| Configure MCP tools | Application Status MCP server (a Microsoft MCP server, Foundry IQ, is already used in v0.1.0) | 0.2.0 | Planned |
+| Configure MCP tools | Own MCP server *LoanDesk Application Status* (Azure Functions MCP extension, API key) on the customer agent; Foundry IQ MCP since v0.1.0 | 0.2.0 | Done |
 | Add a tool by using an existing custom connector | Custom connector *LoanDesk Credit Score* as a staff agent tool; host from `ldk_CreditApiHost` | 0.2.0 | Done |
 | Add REST APIs to an agent | *LoanDesk Credit Score REST* on the Apply Agent, maker credentials, topics only | 0.2.0 | Done |
 
