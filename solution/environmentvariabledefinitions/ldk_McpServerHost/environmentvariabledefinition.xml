@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="ldk_McpServerHost">
+  <description default="Host name of the Application Status MCP function app, without https://. Set per environment.">
+    <label description="Host name of the Application Status MCP function app, without https://. Set per environment." languagecode="1033" />
+  </description>
+  <displayname default="MCP server host">
+    <label description="MCP server host" languagecode="1033" />
+  </displayname>
+  <introducedversion>0.1.1.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

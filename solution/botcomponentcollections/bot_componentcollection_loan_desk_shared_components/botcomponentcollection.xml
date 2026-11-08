@@ -1,0 +1,7 @@
+<botcomponentcollection schemaname="bot_componentcollection_loan_desk_shared_components">
+  <description>Topics shared by LoanDesk agents: talk to a person. Fictional demo.</description>
+  <iscustomizable>1</iscustomizable>
+  <name>LoanDesk shared components</name>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponentcollection>

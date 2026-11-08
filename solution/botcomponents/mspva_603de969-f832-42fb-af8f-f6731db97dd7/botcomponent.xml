@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_603de969-f832-42fb-af8f-f6731db97dd7">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>Am I talking to a real person?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Am I talking to a real person?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_179520fb-3789-49f4-bf77-1a24c220ecf4</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

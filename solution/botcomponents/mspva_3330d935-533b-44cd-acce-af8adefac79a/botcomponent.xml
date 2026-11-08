@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_3330d935-533b-44cd-acce-af8adefac79a">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>How long does a decision take?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>How long does a decision take?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_d90a7e2e-b5ab-43ad-8f6c-471648683717</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

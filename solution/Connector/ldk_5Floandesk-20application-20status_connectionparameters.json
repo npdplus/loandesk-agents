@@ -1,0 +1,1 @@
+{"api_key":{"type":"securestring","uiDefinition":{"displayName":"x-functions-key","description":"The API Key for this connector","constraints":{"required":"true","clearText":false}}}}

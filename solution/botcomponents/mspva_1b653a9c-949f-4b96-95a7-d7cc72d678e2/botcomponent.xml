@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_1b653a9c-949f-4b96-95a7-d7cc72d678e2">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What rate would I get for THB 4,000,000 over 36 months?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What rate would I get for THB 4,000,000 over 36 months?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_179520fb-3789-49f4-bf77-1a24c220ecf4</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: No. The maximum loan amount is THB 5,000,000.
+    input: Can I borrow THB 6,000,000?
+
+extensionData:
+  displayOrder: "1793848317294"

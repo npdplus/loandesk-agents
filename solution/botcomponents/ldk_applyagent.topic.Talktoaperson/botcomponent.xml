@@ -1,0 +1,10 @@
+<botcomponent schemaname="ldk_applyagent.topic.Talktoaperson">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Talk to a person</name>
+  <parentbotcomponentcollectionid>
+    <schemaname>bot_componentcollection_loan_desk_shared_components</schemaname>
+  </parentbotcomponentcollectionid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

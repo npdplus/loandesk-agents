@@ -1,0 +1,11 @@
+<botcomponent schemaname="ldk_applyagent.gpt.default">
+  <componenttype>15</componenttype>
+  <description>Pre-checks a business against the SME Working Capital Loan rules and takes the application. Fictional demo.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>LoanDesk Apply Agent</name>
+  <parentbotid>
+    <schemaname>ldk_applyagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

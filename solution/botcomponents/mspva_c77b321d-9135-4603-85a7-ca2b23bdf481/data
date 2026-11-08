@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: Yes. A front-end fee of 1.00 % of the loan amount, minimum THB 2,000, is deducted when the loan is paid out.
+    input: Is there a fee when the loan is paid out?
+
+extensionData:
+  displayOrder: "1793848317305"

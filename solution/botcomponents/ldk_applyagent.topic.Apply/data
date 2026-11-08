@@ -1,0 +1,230 @@
+kind: AdaptiveDialog
+modelDescription: Takes a loan application for the SME Working Capital Loan and sends it to a credit officer. Use when the customer wants to apply or submit an application.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: LXNmQI
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Apply for the SME Working Capital Loan",
+              "weight": "Bolder",
+              "size": "Medium",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Contoso Bank (fictional). Use fictional details only. A credit officer decides every application.",
+              "isSubtle": true,
+              "wrap": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "businessName",
+              "label": "Business name",
+              "isRequired": true,
+              "errorMessage": "Enter the business name."
+            },
+            {
+              "type": "Input.Text",
+              "id": "businessId",
+              "label": "Business registration ID",
+              "isRequired": true,
+              "regex": "^[A-Za-z0-9][A-Za-z0-9-]{2,19}$",
+              "errorMessage": "Use 3 to 20 letters, digits or hyphens, for example BIZ-100001."
+            },
+            {
+              "type": "Input.Text",
+              "id": "contactEmail",
+              "label": "Contact e-mail",
+              "style": "Email",
+              "isRequired": true,
+              "errorMessage": "Enter an e-mail address."
+            },
+            {
+              "type": "Input.Number",
+              "id": "requestedAmount",
+              "label": "Amount to borrow (THB)",
+              "min": 100000,
+              "max": 5000000,
+              "isRequired": true,
+              "errorMessage": "Enter an amount from 100,000 to 5,000,000."
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "termMonths",
+              "label": "Term",
+              "isRequired": true,
+              "errorMessage": "Choose a term.",
+              "choices": [
+                {
+                  "title": "6 months",
+                  "value": "6"
+                },
+                {
+                  "title": "12 months",
+                  "value": "12"
+                },
+                {
+                  "title": "18 months",
+                  "value": "18"
+                },
+                {
+                  "title": "24 months",
+                  "value": "24"
+                },
+                {
+                  "title": "36 months",
+                  "value": "36"
+                }
+              ]
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "purpose",
+              "label": "Purpose",
+              "isRequired": true,
+              "errorMessage": "Choose a purpose.",
+              "choices": [
+                {
+                  "title": "Inventory",
+                  "value": "Inventory"
+                },
+                {
+                  "title": "Payroll",
+                  "value": "Payroll"
+                },
+                {
+                  "title": "Equipment",
+                  "value": "Equipment"
+                },
+                {
+                  "title": "Other",
+                  "value": "Other"
+                }
+              ]
+            },
+            {
+              "type": "Input.Number",
+              "id": "annualRevenue",
+              "label": "Annual revenue in the latest full year (THB)",
+              "min": 0,
+              "isRequired": true,
+              "errorMessage": "Enter the annual revenue."
+            },
+            {
+              "type": "Input.Number",
+              "id": "yearsInBusiness",
+              "label": "Years in business",
+              "min": 0,
+              "isRequired": true,
+              "errorMessage": "Enter the number of years."
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Submit application"
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          annualRevenue: Topic.annualRevenue
+          businessId: Topic.businessId
+          businessName: Topic.businessName
+          contactEmail: Topic.contactEmail
+          purpose: Topic.purpose
+          requestedAmount: Topic.requestedAmount
+          termMonths: Topic.termMonths
+          yearsInBusiness: Topic.yearsInBusiness
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          annualRevenue: Number
+          businessId: String
+          businessName: String
+          contactEmail: String
+          purpose: String
+          requestedAmount: Number
+          termMonths: String
+          yearsInBusiness: Number
+
+    - kind: HttpRequestAction
+      id: hdx04M
+      url: ="https://" & Env.ldk_CreditApiHost & "/api/credit-score?businessId=" & EncodeUrl(Topic.businessId)
+      headers:
+        x-functions-key: =Env.ldk_CreditApiKey
+
+      errorHandling:
+        kind: ContinueOnErrorBehavior
+        statusCode: Topic.httpStatus
+        errorResponseBody: Topic.httpError
+
+      requestTimeoutInMilliseconds: 10000
+      response: Topic.creditResponse
+      responseSchema:
+        kind: Record
+        properties:
+          businessId: String
+          checkedAt: String
+          mock: Boolean
+          score: Number
+          scoreMax: Number
+          scoreMin: Number
+          source: String
+
+    - kind: SetVariable
+      id: setVariable_X5XmzE
+      variable: Topic.creditScore
+      value: =Topic.creditResponse.score
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_O7e5wk
+      input:
+        binding:
+          number: =Topic.requestedAmount
+          number_1: =Value(Topic.termMonths)
+          number_2: =Topic.annualRevenue
+          number_3: =Topic.yearsInBusiness
+          number_4: =Topic.creditScore
+          text: =Topic.businessName
+          text_1: =Topic.businessId
+          text_2: =Topic.contactEmail
+          text_3: =Topic.purpose
+
+      output:
+        binding:
+          applicationnumber: Topic.ApplicationNumber
+          message: Topic.Message
+          status: Topic.Status
+
+      flowId: ddc692ea-7fd9-f111-84ea-e4fb1effccdd
+
+    - kind: ConditionGroup
+      id: conditionGroup_GcZyhJ
+      conditions:
+        - id: conditionItem_LRmtwQ
+          condition: =Topic.Status = "Submitted"
+          actions:
+            - kind: SendActivity
+              id: sendActivity_v2lY9D
+              activity: "{Topic.Message} Your application number is {Topic.ApplicationNumber} . Keep it to check the status later."
+
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_j1m95F
+          activity: "{Topic.Message}"
+
+inputType: {}
+outputType: {}

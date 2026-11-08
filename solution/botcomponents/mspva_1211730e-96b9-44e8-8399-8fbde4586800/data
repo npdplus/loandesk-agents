@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: Early repayment within the first 12 months costs 2.00 % of the amount repaid early. After 12 months there is no fee.
+    input: What does it cost to repay early?
+
+extensionData:
+  displayOrder: "1793848317304"

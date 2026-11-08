@@ -1,0 +1,1 @@
+{"api_key":{"type":"securestring","uiDefinition":{"displayName":"Function key","description":"The Function key for this api","tooltip":"Provide your Function key","constraints":{"tabIndex":2,"clearText":false,"required":"true"}}}}

@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: No. Cryptocurrency trading is an excluded industry, so the business cannot apply.
+    input: My company trades cryptocurrency. Can it apply?
+
+extensionData:
+  displayOrder: "1794117439531"

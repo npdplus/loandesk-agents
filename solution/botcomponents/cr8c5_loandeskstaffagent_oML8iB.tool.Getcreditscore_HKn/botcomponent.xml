@@ -1,0 +1,11 @@
+<botcomponent schemaname="cr8c5_loandeskstaffagent_oML8iB.tool.Getcreditscore_HKn">
+  <componenttype>9</componenttype>
+  <description>Gets the mock credit score (300 to 900) for a business ID. For credit officers only; never show the score to a customer.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Get credit score</name>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

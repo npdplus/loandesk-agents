@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: The demo credit bureau has no credit file for BIZ-000000, so there is no score to report.
+    input: What is the credit score for BIZ-000000?
+
+extensionData:
+  displayOrder: "1794117049317"

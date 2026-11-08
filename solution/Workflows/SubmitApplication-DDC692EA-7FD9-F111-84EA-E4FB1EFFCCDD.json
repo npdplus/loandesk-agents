@@ -1,0 +1,430 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "ldk_sharedcommondataserviceforapps_ef3f9"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_approvals": {
+        "api": {
+          "name": "shared_approvals"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "ldk_sharedapprovals_03a8c"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "ldk_sharedoffice365_aeb65"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "metadata": {
+        "defaultToEmbeddedConnections": true
+      },
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "Registered name of the business",
+                  "title": "BusinessName",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_1": {
+                  "description": "Business registration ID (fictional)",
+                  "title": "BusinessID",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_2": {
+                  "description": "Contact e-mail for the application",
+                  "title": "ContactEmail",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "number": {
+                  "description": "Amount to borrow in THB",
+                  "title": "RequestedAmount",
+                  "type": "number",
+                  "x-ms-content-hint": "NUMBER",
+                  "x-ms-dynamically-added": true
+                },
+                "number_1": {
+                  "description": "Term in months: 6, 12, 18, 24 or 36",
+                  "title": "TermMonths",
+                  "type": "number",
+                  "x-ms-content-hint": "NUMBER",
+                  "x-ms-dynamically-added": true
+                },
+                "text_3": {
+                  "description": "Inventory, Payroll, Equipment or Other",
+                  "title": "Purpose",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "number_2": {
+                  "description": "Annual revenue in THB",
+                  "title": "AnnualRevenue",
+                  "type": "number",
+                  "x-ms-content-hint": "NUMBER",
+                  "x-ms-dynamically-added": true
+                },
+                "number_3": {
+                  "description": "Years in business",
+                  "title": "YearsInBusiness",
+                  "type": "number",
+                  "x-ms-content-hint": "NUMBER",
+                  "x-ms-dynamically-added": true
+                },
+                "number_4": {
+                  "title": "CreditScore",
+                  "type": "number",
+                  "x-ms-dynamically-added": true,
+                  "description": "Mock credit score at submission (300 to 900). Empty when none.",
+                  "x-ms-content-hint": "NUMBER"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2",
+                "number",
+                "number_1",
+                "text_3",
+                "number_2",
+                "number_3"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764"
+          }
+        }
+      },
+      "actions": {
+        "Add_a_new_row": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "ldk_loanapplications",
+              "item/ldk_annualrevenue": "@triggerBody()?['number_2']",
+              "item/ldk_applicationstatus": "852190000",
+              "item/ldk_businessid": "@triggerBody()?['text_1']",
+              "item/ldk_businessname": "@triggerBody()?['text']",
+              "item/ldk_contactemail": "@triggerBody()?['text_2']",
+              "item/ldk_creditscore": "@  triggerBody()?['number_4']",
+              "item/ldk_purpose": "@if(equals(toLower(coalesce(triggerBody()?['text_3'], '')), 'inventory'), 852190000, if(equals(toLower(coalesce(triggerBody()?['text_3'], '')), 'payroll'), 852190001, if(equals(toLower(coalesce(triggerBody()?['text_3'], '')), 'equipment'), 852190002, 852190003)))",
+              "item/ldk_requestedamount": "@triggerBody()?['number']",
+              "item/ldk_termmonths": "@triggerBody()?['number_1']",
+              "item/ldk_yearsinbusiness": "@triggerBody()?['number_3']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "7c5652a7-dc1d-4520-a16a-adf0b3896dfd"
+          }
+        },
+        "Start_and_wait_for_an_approval": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "approvalType": "Basic",
+              "WebhookApprovalCreationInput/title": "Loan application @{outputs('Add_a_new_row')?['body/ldk_applicationnumber']} - @{triggerBody()?['text']}",
+              "WebhookApprovalCreationInput/assignedTo": "@coalesce(first(first(outputs('Get_approver_email')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue'])?['value'], first(outputs('Get_approver_email')?['body/value'])?['defaultvalue'])",
+              "WebhookApprovalCreationInput/details": "Amount (THB):  @{triggerBody()?['number']}\nTerm (months): @{triggerBody()?['number_1']}\nPurpose: @{triggerBody()?['text_3']}\nAnnual revenue (THB): @{outputs('Add_a_new_row')?['body/ldk_annualrevenue']}\nYears in business: @{triggerBody()?['number_3']}\nBusiness ID: @{triggerBody()?['text_1']}\nCredit score (mock, staff only): @{if(empty(triggerBody()?['number_4']), 'not available', string(triggerBody()?['number_4']))} \n\nPre-check by the LoanDesk assistant. A credit officer decides. Give a reason in the comments.",
+              "WebhookApprovalCreationInput/enableNotifications": true,
+              "WebhookApprovalCreationInput/enableReassignment": true
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+              "operationId": "StartAndWaitForAnApproval",
+              "connectionName": "shared_approvals"
+            }
+          },
+          "runAfter": {
+            "Get_approver_email": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "37772cdf-96de-4781-88fd-238ff8ccbed6"
+          }
+        },
+        "Condition": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@outputs('Start_and_wait_for_an_approval')?['body/outcome']",
+                  "Approve"
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Approved": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "ldk_loanapplications",
+                  "recordId": "@outputs('Add_a_new_row')?['body/ldk_loanapplicationid']",
+                  "item/ldk_applicationstatus": "852190002",
+                  "item/ldk_decidedby": "@first(outputs('Start_and_wait_for_an_approval')?['body/responses'])?['responder']?['email']",
+                  "item/ldk_decidedon": "@first(outputs('Start_and_wait_for_an_approval')?['body/responses'])?['responseDate']",
+                  "item/ldk_decisionreason": "@first(outputs('Start_and_wait_for_an_approval')?['body/responses'])?['comments']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "a8a9dbd7-a1c1-419e-985e-c504c0fbc545"
+              }
+            }
+          },
+          "else": {
+            "actions": {
+              "Rejected": {
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "parameters": {
+                    "entityName": "ldk_loanapplications",
+                    "recordId": "@outputs('Add_a_new_row')?['body/ldk_loanapplicationid']",
+                    "item/ldk_applicationstatus": "852190003",
+                    "item/ldk_decidedby": "@first(outputs('Start_and_wait_for_an_approval')?['body/responses'])?['responder']?['email']",
+                    "item/ldk_decidedon": "@first(outputs('Start_and_wait_for_an_approval')?['body/responses'])?['responseDate']",
+                    "item/ldk_decisionreason": "@first(outputs('Start_and_wait_for_an_approval')?['body/responses'])?['comments']"
+                  },
+                  "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                    "operationId": "UpdateOnlyRecord",
+                    "connectionName": "shared_commondataserviceforapps"
+                  }
+                },
+                "metadata": {
+                  "operationMetadataId": "69313e9b-cc90-43ac-9af6-91167444df68"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Start_and_wait_for_an_approval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f231c18b-98b4-4efe-965c-db23a3e3fe27"
+          }
+        },
+        "Respond_to_the_agent": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "applicationnumber": {
+                  "title": "ApplicationNumber",
+                  "x-ms-dynamically-added": true,
+                  "type": "string",
+                  "description": "Application number to give the customer, for example LDK-000003"
+                },
+                "status": {
+                  "title": "Status",
+                  "x-ms-dynamically-added": true,
+                  "type": "string",
+                  "description": "Status of the application after submission"
+                },
+                "message": {
+                  "title": "Message",
+                  "x-ms-dynamically-added": true,
+                  "type": "string",
+                  "description": "Confirmation to show the customer as written"
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "applicationnumber": "@{outputs('Add_a_new_row')?['body/ldk_applicationnumber']}",
+              "status": "Submitted",
+              "message": "   Your application has been received. A credit officer will review it and decide within 5 business days after all required documents arrive."
+            }
+          },
+          "runAfter": {
+            "Add_a_new_row": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "25b9f6b7-b7c4-415f-b745-096e624867cd"
+          }
+        },
+        "Respond_to_the_agent_-_error": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "applicationnumber": {
+                  "title": "ApplicationNumber",
+                  "x-ms-dynamically-added": true,
+                  "type": "string",
+                  "description": "Application number to give the customer, for example LDK-000003"
+                },
+                "status": {
+                  "title": "Status",
+                  "x-ms-dynamically-added": true,
+                  "type": "string",
+                  "description": "Status of the application after submission"
+                },
+                "message": {
+                  "title": "Message",
+                  "x-ms-dynamically-added": true,
+                  "type": "string",
+                  "description": "Confirmation to show the customer as written"
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "applicationnumber": "-",
+              "status": "Error",
+              "message": "We could not save your application. Please try again later, or contact the Lending Centre at lending@contoso-bank.example."
+            }
+          },
+          "runAfter": {
+            "Add_a_new_row": [
+              "Failed",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1f5bc9fd-3636-4c17-b4ba-776e4321a2bd"
+          }
+        },
+        "Get_approver_email": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "environmentvariabledefinitions",
+              "$select": "defaultvalue,schemaname",
+              "$filter": "schemaname eq 'ldk_ApproverEmail'",
+              "$top": 1,
+              "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Respond_to_the_agent": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "88e2b3c0-1143-42b7-83bc-e15bc2546400"
+          }
+        },
+        "Get_notify_email": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "environmentvariabledefinitions",
+              "$select": "defaultvalue,schemaname",
+              "$filter": "schemaname eq 'ldk_NotifyEmail'",
+              "$top": 1,
+              "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Respond_to_the_agent": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5550a30b-d88e-4034-b79d-81138aa4287b"
+          }
+        },
+        "Send_an_email_(V2)": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "emailMessage/To": "@coalesce(first(first(outputs('Get_notify_email')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue'])?['value'], first(outputs('Get_notify_email')?['body/value'])?['defaultvalue'])",
+              "emailMessage/Subject": "New loan application @{outputs('Add_a_new_row')?['body/ldk_applicationnumber']}",
+              "emailMessage/Body": "<p class=\"editor-paragraph\">A new loan application was submitted.<br><br>Application number:  @{outputs('Add_a_new_row')?['body/ldk_applicationnumber']}<br>Business:  @{triggerBody()?['text']}<br>Amount (THB):  @{triggerBody()?['number']}<br>Term (months): @{triggerBody()?['number_1']}<br>Purpose: @{triggerBody()?['text_3']}<br><br>Approve or reject it in Power Automate &gt; Approvals.<br>Contoso Bank (fictional) — demo data only.</p>",
+              "emailMessage/Importance": "Normal"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "operationId": "SendEmailV2",
+              "connectionName": "shared_office365"
+            }
+          },
+          "runAfter": {
+            "Get_notify_email": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "cf609fdb-81e8-4831-97f7-cfb991f7cf7b"
+          }
+        }
+      },
+      "outputs": {},
+      "description": "When an agent calls the flow and send back a response."
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

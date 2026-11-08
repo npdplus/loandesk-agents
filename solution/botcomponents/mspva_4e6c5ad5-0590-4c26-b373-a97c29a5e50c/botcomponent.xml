@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_4e6c5ad5-0590-4c26-b373-a97c29a5e50c">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What is the credit score for BIZ-100002?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What is the credit score for BIZ-100002?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_1f5dee9f-8b29-4482-9d61-f131ba7c7a1f</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

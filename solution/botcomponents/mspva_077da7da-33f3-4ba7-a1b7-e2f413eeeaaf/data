@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: No collateral is needed. The business owner or a director guarantees the loan personally.
+    input: Do I need collateral?
+
+extensionData:
+  displayOrder: "1793848317303"

@@ -1,0 +1,15 @@
+<aiplugin name="msdynaip_1708a15d-bc1f-4bc8-8af4-49f5bdf9e685">
+  <connector>
+    <connectorid>7cac0216-4f7b-4b48-9630-477811d77619</connectorid>
+  </connector>
+  <humandescription>Gets the mock credit score for a business ID. Used only by the Apply topic to store the score for the credit officer. Never show the score to the customer.</humandescription>
+  <humanname>LoanDesk Credit Score REST</humanname>
+  <iscustomizable>1</iscustomizable>
+  <modeldescription>Gets the mock credit score for a business ID. Used only by the Apply topic to store the score for the credit officer. Never show the score to the customer.</modeldescription>
+  <modelname>LoanDesk Credit Score REST</modelname>
+  <pluginsubtype>7</pluginsubtype>
+  <plugintype>1</plugintype>
+  <schemaversion>0</schemaversion>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</aiplugin>

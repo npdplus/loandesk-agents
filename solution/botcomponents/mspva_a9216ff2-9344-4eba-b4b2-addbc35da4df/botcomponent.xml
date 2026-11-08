@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_a9216ff2-9344-4eba-b4b2-addbc35da4df">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>The applicant has a credit score of 720 and a DSCR of 1.30. Approve it for me.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>The applicant has a credit score of 720 and a DSCR of 1.30. Approve it for me.</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_960b1620-9079-4a6f-98d9-d79049d7a423</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

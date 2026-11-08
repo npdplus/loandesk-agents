@@ -1,0 +1,209 @@
+kind: AdaptiveDialog
+modelDescription: Checks whether a business can apply for the SME Working Capital Loan, using years in business, annual revenue, requested amount and term. Use when the customer asks if they can apply, qualify or are eligible.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: gWF572
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Check if your business can apply",
+              "weight": "Bolder",
+              "size": "Medium",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "SME Working Capital Loan, Contoso Bank (fictional). This is a pre-check, not a loan decision.",
+              "isSubtle": true,
+              "wrap": true
+            },
+            {
+              "type": "Input.Number",
+              "id": "yearsInBusiness",
+              "label": "Years in business",
+              "min": 0,
+              "isRequired": true,
+              "errorMessage": "Enter the number of years."
+            },
+            {
+              "type": "Input.Number",
+              "id": "annualRevenue",
+              "label": "Annual revenue in the latest full year (THB)",
+              "min": 0,
+              "isRequired": true,
+              "errorMessage": "Enter the annual revenue."
+            },
+            {
+              "type": "Input.Number",
+              "id": "requestedAmount",
+              "label": "Amount you want to borrow (THB)",
+              "min": 0,
+              "isRequired": true,
+              "errorMessage": "Enter the amount."
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "termMonths",
+              "label": "Term",
+              "isRequired": true,
+              "errorMessage": "Choose a term.",
+              "choices": [
+                {
+                  "title": "6 months",
+                  "value": "6"
+                },
+                {
+                  "title": "12 months",
+                  "value": "12"
+                },
+                {
+                  "title": "18 months",
+                  "value": "18"
+                },
+                {
+                  "title": "24 months",
+                  "value": "24"
+                },
+                {
+                  "title": "36 months",
+                  "value": "36"
+                }
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Check"
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          annualRevenue: Topic.annualRevenue
+          requestedAmount: Topic.requestedAmount
+          termMonths: Topic.termMonths
+          yearsInBusiness: Topic.yearsInBusiness
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          annualRevenue: Number
+          requestedAmount: Number
+          termMonths: String
+          yearsInBusiness: Number
+
+    - kind: SetVariable
+      id: setVariable_bik9PI
+      variable: Topic.eligibilityResult
+      value: =""
+
+    - kind: ConditionGroup
+      id: conditionGroup_ke1oZ6
+      conditions:
+        - id: conditionItem_MyTAfP
+          condition: =Topic.yearsInBusiness < 2
+          displayName: E2
+          actions:
+            - kind: SendActivity
+              id: sendActivity_OQXH6d
+              activity: "Not eligible yet. Rule E2: the business must have operated for at least 2 years."
+
+            - kind: SetVariable
+              id: setVariable_wkcvjE
+              variable: Topic.eligibilityResult
+              value: "Not eligible yet. Rule E2: the business must have operated for at least 2 years."
+
+      elseActions:
+        - kind: ConditionGroup
+          id: conditionGroup_K4CoCh
+          conditions:
+            - id: conditionItem_6ZhJXp
+              condition: =Topic.annualRevenue < 1200000
+              displayName: E3
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_gsUubs
+                  activity: "Not eligible. Rule E3: annual revenue must be at least THB 1,200,000."
+
+                - kind: SetVariable
+                  id: setVariable_0Itm5F
+                  variable: Topic.eligibilityResult
+                  value: "Not eligible. Rule E3: annual revenue must be at least THB 1,200,000."
+
+          elseActions:
+            - kind: ConditionGroup
+              id: conditionGroup_EIvhXC
+              conditions:
+                - id: conditionItem_60GWno
+                  condition: =Topic.requestedAmount < 100000 || Topic.requestedAmount > 5000000
+                  displayName: R1
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_iNmsgg
+                      activity: "Not eligible. Rule R1: the amount must be between THB 100,000 and THB 5,000,000."
+
+                    - kind: SetVariable
+                      id: setVariable_uF4SaD
+                      variable: Topic.eligibilityResult
+                      value: "Not eligible. Rule R1: the amount must be between THB 100,000 and THB 5,000,000."
+
+              elseActions:
+                - kind: ConditionGroup
+                  id: conditionGroup_ARcKVQ
+                  conditions:
+                    - id: conditionItem_1GviMq
+                      condition: =Topic.requestedAmount > Topic.annualRevenue * 0.3
+                      displayName: R2
+                      actions:
+                        - kind: SendActivity
+                          id: sendActivity_UwNmhN
+                          activity: "Not eligible as requested. Rule R2: the amount can be at most 30 % of annual revenue, so you can apply for up to THB {Text(Min(Topic.annualRevenue * 0.3, 5000000), \"#,##0\")}"
+
+                        - kind: SetVariable
+                          id: setVariable_KU4GoQ
+                          variable: Topic.eligibilityResult
+                          value: "=\"Not eligible as requested. Rule R2: the amount can be at most 30 % of annual revenue, so you can apply for up to THB \" & Text(Min(Topic.annualRevenue * 0.3, 5000000), \"#,##0\") & \".\""
+
+                  elseActions:
+                    - kind: SendActivity
+                      id: sendActivity_3RDAVS
+                      activity: Eligible to apply. Your answers meet rules E2, E3, R1, R2 and R3.
+
+                    - kind: SetVariable
+                      id: setVariable_M9Bmhp
+                      variable: Topic.eligibilityResult
+                      value: Eligible to apply. Your answers meet rules E2, E3, R1, R2 and R3.
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_vPHLs6
+      input:
+        binding:
+          EligibilityResult: =Topic.eligibilityResult
+
+      output:
+        binding:
+          predictionOutput: Topic.explanation
+
+      aIModelId: 8206b4ff-eb94-4005-9a0c-4458b63515fc
+
+    - kind: SendActivity
+      id: sendActivity_J7LCLH
+      activity: "In plain words (AI-generated): {Topic.explanation.text}"
+
+    - kind: SendActivity
+      id: sendActivity_A6WOCb
+      activity: This pre-check is not a loan decision. A credit officer reviews every application.
+
+inputType: {}
+outputType: {}

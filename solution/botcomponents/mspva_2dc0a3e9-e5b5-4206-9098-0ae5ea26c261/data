@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: The loan term can be 6, 12, 18, 24 or 36 months.
+    input: What loan terms can I choose?
+
+extensionData:
+  displayOrder: "1793848317308"

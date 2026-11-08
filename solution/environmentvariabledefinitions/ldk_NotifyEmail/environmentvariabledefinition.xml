@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="ldk_NotifyEmail">
+  <description default="Mailbox that is told about new applications.">
+    <label description="Mailbox that is told about new applications." languagecode="1033" />
+  </description>
+  <displayname default="Notification email">
+    <label description="Notification email" languagecode="1033" />
+  </displayname>
+  <introducedversion>0.1.1.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

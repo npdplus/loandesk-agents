@@ -1,0 +1,5 @@
+<botcomponent_workflowset>
+  <botcomponent_workflow botcomponentid.schemaname="ldk_applyagent.topic.Apply" workflowid.workflowid="ddc692ea-7fd9-f111-84ea-e4fb1effccdd">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+</botcomponent_workflowset>

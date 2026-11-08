@@ -1,0 +1,12 @@
+<botcomponent schemaname="mspva_960b1620-9079-4a6f-98d9-d79049d7a423">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>v0.1.0 staff</description>
+  <iscustomizable>0</iscustomizable>
+  <name>v0.1.0 staff</name>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

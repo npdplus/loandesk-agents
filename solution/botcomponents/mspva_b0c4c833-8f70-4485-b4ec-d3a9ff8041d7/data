@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: A second approval by a senior credit officer is needed for an application above THB 3,000,000, or for any decision that departs from the decision guide.
+    input: When do I need a second approval from a senior officer?
+
+extensionData:
+  displayOrder: "1794117049324"

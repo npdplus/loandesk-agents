@@ -1,32 +1,50 @@
 # Solution
 
-The **LoanDesk** Power Platform solution, version 0.1.1.0, publisher *NPD PLUS Labs* (`npdpluslabs`, prefix
-`ldk`). Exported **unmanaged** from `LoanDesk-Dev` on 2026-11-05 (0.1.0.0 is tagged `v0.1.0`; 0.1.1.0 removes
-the Work IQ capability components) (Solutions → Export solution) and unzipped
-here. Line endings were normalised to LF, trailing spaces and one byte-order mark were removed; nothing else
-was changed.
+The **LoanDesk** Power Platform solution, version **0.2.0.1**, publisher *NPD PLUS Labs* (`npdpluslabs`,
+prefix `ldk`). Exported **unmanaged** from `LoanDesk-Dev` on 2026-11-08 (Solutions → Export solution) and
+unzipped here. Line endings were normalised to LF and one byte-order mark was removed; nothing else was
+changed.
+
+Earlier exports: 0.1.0.0 is tagged `v0.1.0`; 0.1.1.0 removed the Work IQ capability components (decision
+D10). 0.2.0.0 was exported first for v0.2.0 but missed two agent tools (see *Known items*), so 0.2.0.1 is
+the one kept here.
 
 | Path | What it is |
 |---|---|
-| `solution.xml`, `customizations.xml`, `[Content_Types].xml` | Solution manifest and customisations |
-| `bots/<agent>/bot.xml`, `configuration.json` | The two agents: name, model (`claude-sonnet-5-5`), instructions, web search off |
-| `botcomponents/*.tool.Azure-FoundryIQ-*` | The Foundry IQ MCP tool of each agent, with its knowledge base name (`kb-loan-policy-public` or `kb-loan-policy-staff`) |
-| `botcomponents/Default_FeedbackCollectionBotSettings_*` | Feedback settings |
-| `Assets/botcomponent_connectionreferenceset.xml` | Links each tool to its connection reference |
-| `environmentvariabledefinitions/` | `ldk_SearchIndexPublic`, `ldk_SearchIndexStaff` |
+| `solution.xml`, `customizations.xml`, `[Content_Types].xml` | Solution manifest and customisations: table **Loan Application** (`ldk_loanapplication`), security role **LoanDesk Status Reader**, the prompt (AI model) *Explain eligibility result 1* |
+| `bots/<agent>/` | The three agents: customer and staff (new experience) and `ldk_applyagent` (standard harness) |
+| `botcomponents/<agent>.tool.*` | Agent tools: Foundry IQ MCP (customer, staff), *Get credit score* (staff), *LoanDesk Application Status* MCP (customer) |
+| `botcomponents/ldk_applyagent.topic.*` | Apply Agent topics: Apply, Check eligibility, Rates and the system topics |
+| `botcomponents/ldk_applyagent.action.*`, `aiplugins/`, `aipluginoperations/` | The REST API tool *Get credit score REST* |
+| `botcomponents/mspva_*` | Evaluate test cases (category *Testing*) of the customer and staff agents, v0.1.0 and v0.2.0 sets; the same questions as `evals/import/` |
+| `botcomponentcollections/` | Component collection *LoanDesk shared components* (Talk to a person) |
+| `Connector/` | Custom connectors *LoanDesk Credit Score*, *LoanDesk Credit Score REST* and *LoanDesk Application Status* (MCP) |
+| `Workflows/` | Agent flow **Submit Application** |
+| `environmentvariabledefinitions/` | Seven environment variables (definitions only) |
+| `Assets/` | Links from agent components to connection references, environment variables, the AI model and the flow |
 
 ## What is not here
 
-- **No secrets.** A connection reference names a connection; the Azure AI Search query key stays in the
-  connection in the environment. Importing the solution elsewhere asks for a new connection.
-- No tenant ID, environment URL or person's e-mail address (checked before committing).
+- **No secrets.** Connections hold the function keys and the Azure AI Search query key; the topic's key is
+  in Key Vault behind `ldk_CreditApiKey`. Importing the solution elsewhere asks for new connections.
+- **No environment values.** The current values of `ldk_ApproverEmail`, `ldk_NotifyEmail`,
+  `ldk_CreditApiHost`, `ldk_CreditApiKey` and `ldk_McpServerHost` have *Export value* set to *No*; an import
+  asks for them. The three connectors read their host from `@environmentVariables(...)`.
+- No tenant ID, subscription ID, environment URL, function host name, client ID, person's e-mail address or
+  Application Insights connection string (checked before committing). The test cases use fictional
+  `.example` addresses.
 
 ## Known items
 
-- The agents and their tool connection references use the prefix `cr8c5_` of the environment's default
-  publisher, because they were created before they joined the solution.
-- 0.1.0.0 carried six Work IQ capability components per agent with `access: Write`. They were deleted in
-  0.1.1.0 (decision D10 in [../docs/decisions.md](../docs/decisions.md)).
+- The customer and staff agents and their first tool connection references use the prefix `cr8c5_` of the
+  environment's default publisher, because they were created before they joined the solution.
+- **0.2.0.0 missed two tools** added after the agents joined the solution (*Get credit score* and the
+  Application Status MCP tool). *Add required objects* on both agents fixed it; it also brought in their
+  Evaluate test cases and two connection references.
+- The security role carries the baseline privileges Dataverse adds to every new role (plug-in and SDK
+  message reads, SharePoint data) besides **Read** on Loan Application.
+- Connection references left over from flow experiments (Mail/SendGrid, Excel Online, a second Dataverse
+  reference) are not used and can be removed from the solution later.
 
 ## Next exports
 

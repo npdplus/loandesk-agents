@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: The mock credit score for BIZ-100009 is 659. For a score from 600 to 699, the decision guide says approve with a senior officer's review if the DSCR is 1.50 or more, and decline if it is below 1.50. The credit officer decides.
+    input: What is the credit score for BIZ-100009, and what does the decision guide say for that score?
+
+extensionData:
+  displayOrder: "1794117049319"

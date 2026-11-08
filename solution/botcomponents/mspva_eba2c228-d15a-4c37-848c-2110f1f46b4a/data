@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: The minimum annual revenue is THB 1,200,000 in the latest full year.
+    input: What is the minimum annual revenue to apply?
+
+extensionData:
+  displayOrder: "1794117439546"

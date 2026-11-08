@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_22f39d91-c69b-489c-a0d5-a9aa3cbb8b59">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>My company trades cryptocurrency. Can it apply?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>My company trades cryptocurrency. Can it apply?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_d90a7e2e-b5ab-43ad-8f6c-471648683717</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

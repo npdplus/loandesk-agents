@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_685fd02a-f842-4477-97e5-a60d97302748">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What is the range of the credit score?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What is the range of the credit score?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_960b1620-9079-4a6f-98d9-d79049d7a423</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

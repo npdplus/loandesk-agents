@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: The mock credit score for BIZ-100002 is 414, which is below 600. For a score below 600 the decision guide says decline, whatever the DSCR. The credit officer decides.
+    input: What is the credit score for BIZ-100002?
+
+extensionData:
+  displayOrder: "1794117049318"

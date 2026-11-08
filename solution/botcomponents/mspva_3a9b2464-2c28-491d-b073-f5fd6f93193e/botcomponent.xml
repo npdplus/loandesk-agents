@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_3a9b2464-2c28-491d-b073-f5fd6f93193e">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>What does reason code D04 mean?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>What does reason code D04 mean?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_960b1620-9079-4a6f-98d9-d79049d7a423</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskstaffagent_oML8iB</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

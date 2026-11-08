@@ -1,0 +1,15 @@
+<botcomponent schemaname="mspva_be26255d-8070-4e6c-81ed-2f46170126c9">
+  <category>Testing</category>
+  <componenttype>19</componenttype>
+  <description>Can I borrow THB 6,000,000?</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Can I borrow THB 6,000,000?</name>
+  <parentbotcomponentid>
+    <schemaname>mspva_179520fb-3789-49f4-bf77-1a24c220ecf4</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr8c5_loandeskcustomeragent_lnC1dD</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

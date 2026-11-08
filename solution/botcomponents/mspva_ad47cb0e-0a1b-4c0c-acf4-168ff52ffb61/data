@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: You can borrow from THB 100,000 to THB 5,000,000, and no more than 30 % of your annual revenue.
+    input: How much can I borrow?
+
+extensionData:
+  displayOrder: "1793848317309"

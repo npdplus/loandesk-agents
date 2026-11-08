@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: The rate for THB 4,000,000 over 36 months is 7.00 % a year, fixed.
+    input: What rate would I get for THB 4,000,000 over 36 months?
+
+extensionData:
+  displayOrder: "1793848317306"

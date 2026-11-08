@@ -1,0 +1,8 @@
+kind: EvaluationData
+rows:
+  - source: Imported
+    expectedOutput: Application LDK-000004 is Approved. The status last changed on 2026-11-06. The Lending Centre will contact you about the next steps.
+    input: What is the status of application LDK-000004? My e-mail is owner@contoso-coffee.example
+
+extensionData:
+  displayOrder: "1794117439521"
