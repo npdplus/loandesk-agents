@@ -1,7 +1,7 @@
 # Roadmap
 
 Three versions. Each one ends with something that works and can be shown. Later versions are a bonus: by the
-end of v0.2.0 the project already practises about three quarters of the AB-620 skills.
+end of v0.2.0 the project already practises about three quarters of the AB-620 skills (32 of 44).
 
 Coverage counts the 44 skill lines of the AB-620 study guide (updated 2026-10-16); see
 [ab-620-coverage.md](ab-620-coverage.md).
@@ -22,7 +22,8 @@ Bank's documents, name their sources, and decline what they should not answer.
 **Done when:** the test set passes at the agreed rate (set in the v0.1.0 plan), answers name sources, the
 solution is in the repository, and the README shows screenshots.
 
-**Coverage:** 13 of 44 skill lines (re-scoped 2026-11-05; topics moved to v0.2.0).
+**Coverage:** 11 of 44 skill lines (re-scoped 2026-11-05: topics moved to v0.2.0; 2026-11-06: identity and
+channel planning moved to v0.3.0).
 
 Detailed plan: [v0.1.0-plan.md](v0.1.0-plan.md).
 
@@ -43,7 +44,10 @@ Detailed plan: [v0.1.0-plan.md](v0.1.0-plan.md).
 - Moved on to v0.3.0 (2026-11-06): channels, Entra ID sign-in, content moderation and the SharePoint knowledge
   source, because the maker's trial cannot publish
 
-**Coverage:** 21 more, 34 of 44 (77 %).
+**Coverage:** 21 more, 32 of 44 (73 %).
+
+**Done 2026-11-08** (release `v0.2.0`, solution 0.2.0.1): Evaluate 8/8 staff and 29/29 customer, with every
+v0.1.0 question still passing.
 
 Detailed plan: [v0.2.0-plan.md](v0.2.0-plan.md).
 
