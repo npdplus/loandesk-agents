@@ -50,4 +50,5 @@ person?"), as the new instruction says.
 
 Evaluate cannot fill in cards, so these stay manual: APPLY-01 (R1), APPLY-02 (R4) and ELIG-T3 passed on
 2026-11-05 to 2026-11-07 (see `2026-11-07-credit-score-api/` and `2026-11-05-check-eligibility/`).
-APPLY-03 (business ID `AB` rejected by the card pattern) is checked before the release.
+APPLY-03 passed on 2026-11-08: with business ID `AB` the card showed "Use 3 to 20 letters, digits or hyphens,
+for example BIZ-100001." under the field and sent nothing (no message, no new application number).
