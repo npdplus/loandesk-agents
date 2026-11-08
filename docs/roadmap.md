@@ -65,7 +65,10 @@ Detailed plan: [v0.2.0-plan.md](v0.2.0-plan.md).
 - From v0.2.0: web and Teams channels, Entra ID sign-in for staff, content moderation review, SharePoint
   knowledge, *Needs information* when an approval fails (needs a licence that can publish)
 
-**Coverage:** 7 more, 41 of 44 (93 %). The last 3 are study only.
+**Coverage:** 9 more, 41 of 44 (93 %), if channels, identity and connected agents can be published (decision
+D15 in the plan); otherwise 37 or 38. The last 3 are study only.
+
+Detailed plan: [v0.3.0-plan.md](v0.3.0-plan.md).
 
 ## After v0.3.0
 
