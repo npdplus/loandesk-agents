@@ -112,7 +112,7 @@ Each Currency column comes with a "(Base)" column that Dataverse adds for the ba
 | `ldk_SearchIndexStaff` | Staff index name (`loan-policy-staff`) | 0.1.0 |
 | `ldk_CreditApiHost` | Host name of the Credit Score function app (no `https://`); the custom connector's Host field and the Apply topic's Send HTTP request read it | 0.2.0 |
 | `ldk_CreditApiKey` | **Secret** type: points to secret `credit-api-key` in Key Vault `kv-loandesk-dev` (function key `copilot-topic`); read by the Send HTTP request | 0.2.0 |
-| `ldk_McpServerUrl` | URL of the MCP server | 0.2.0 |
+| `ldk_McpServerHost` | Host name of the MCP function app, for the MCP tool's connector (set up before the 0.2.0.0 export) | 0.2.0 |
 | `ldk_ApproverEmail` | Approver account for the approval step (read with *List rows* in the agent flow) | 0.2.0 |
 | `ldk_NotifyEmail` | Mailbox told about new applications | 0.2.0 |
 
@@ -158,5 +158,7 @@ Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 10 mon
 | Function app | `func-loandesk-credit-dev` | Credit Score API; Flex Consumption, Python 3.14, 512 MB, no always-ready instances; basic auth off; telemetry to `appi-loandesk-dev` (v0.2.0) |
 | Storage account | `stloandeskdevflex` | Host and deployment storage of the function app only, separate from the knowledge documents |
 | Managed identity | `func-loandesk-credit-dev-uami` | User-assigned; the function app's access to its storage and Application Insights |
+| Function app | `func-loandesk-mcp-dev` | Application Status MCP server; Flex Consumption, Python 3.14, 512 MB; own storage `stloandeskmcp` and identity `func-loandesk-mcp-dev-uami`; app settings `DATAVERSE_URL`, `DATAVERSE_CLIENT_ID` (v0.2.0) |
+| Dataverse application user | `func-loandesk-mcp-dev-uami` | Security role *LoanDesk Status Reader*: Loan Application read only (v0.2.0) |
 | Key Vault | `kv-loandesk-dev` | Azure RBAC; secret `credit-api-key` tagged `AllowedEnvironments` for `LoanDesk-Dev`; Key Vault Secrets User for Dataverse and Microsoft Copilot Studio Service (v0.2.0) |
 | Power Platform billing plan | pay-as-you-go | Dataverse and Copilot Studio meters only |

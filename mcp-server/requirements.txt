@@ -1,0 +1,3 @@
+# Installed by the remote build on Azure. azure-functions 1.24 or later has the MCP tool trigger.
+azure-functions>=1.24,<2
+azure-identity>=1.19,<2

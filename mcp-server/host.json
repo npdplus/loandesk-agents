@@ -1,0 +1,25 @@
+{
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  },
+  "extensions": {
+    "mcp": {
+      "serverName": "LoanDesk Application Status",
+      "serverVersion": "0.2.0",
+      "instructions": "Use get_application_status with the application number and the contact e-mail address from the loan application. It returns the status only.",
+      "system": {
+        "webhookAuthorizationLevel": "System"
+      }
+    }
+  },
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.*, 5.0.0)"
+  }
+}
