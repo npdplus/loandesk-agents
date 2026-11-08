@@ -163,5 +163,6 @@ against it too):
 | Function app | `func-loandesk-mcp-dev` | Application Status MCP server; Flex Consumption, Python 3.14, 512 MB; own storage `stloandeskmcp` and identity `func-loandesk-mcp-dev-uami`; app settings `DATAVERSE_URL`, `DATAVERSE_CLIENT_ID` (v0.2.0) |
 | Dataverse application user | `func-loandesk-mcp-dev-uami` | Security role *LoanDesk Status Reader*: Loan Application read only (v0.2.0) |
 | Key Vault | `kv-loandesk-dev` | Azure RBAC; secret `credit-api-key` tagged `AllowedEnvironments` for `LoanDesk-Dev`; Key Vault Secrets User for Dataverse and Microsoft Copilot Studio Service (v0.2.0) |
-| Microsoft Foundry | `aif-loandesk-dev-03` | Project `proj-loandesk`; deployment `gpt-4.1-mini` (Global Standard, 10K TPM); maker has Foundry User (v0.3.0) |
+| Microsoft Foundry | `aif-loandesk-dev-03` | Project `proj-loandesk`; deployment `gpt-4.1-mini` (Global Standard, 10K TPM); maker has Foundry User; used by the custom prompt (bring your own model) and by the Document Agent (v0.3.0) |
+| Foundry agent | `loandesk-document-agent` | Prompt agent in `proj-loandesk`; File search over `required-documents.md`; Responses and Activity protocols, Entra and BotServiceRbac authorization; called by the Apply Agent through the *Azure AI Foundry Agent Service* connection (v0.3.0) |
 | Power Platform billing plan | pay-as-you-go | Dataverse and Copilot Studio meters only |
