@@ -48,26 +48,35 @@ def agent_url(project_endpoint: str, agent_name: str) -> str:
     return f"{base}/agents/{name}?api-version={API_VERSION}"
 
 
+PATCHED_FIELDS = ("protocols", "protocol_configuration", "authorization_schemes")
+
+
 def with_activity(endpoint: dict[str, Any] | None) -> dict[str, Any]:
-    """Return a copy of ``agent_endpoint`` with the Activity protocol and BotServiceRbac added.
+    """Return the fields to send: protocols and authorization schemes with Activity added.
 
-    Two shapes are in use. Older previews list protocols in ``protocols``; the current one keys them
-    in ``protocol_configuration``. Whatever is already there is kept.
+    The service returns protocols in two places at once, the list ``protocols`` and the map
+    ``protocol_configuration``; both are updated, and whatever is already in them is kept. Only
+    the fields in ``PATCHED_FIELDS`` are returned: read-only fields such as
+    ``publish_approval_status`` and the ``version_selector`` are left out of the merge patch, so
+    they stay as they are.
     """
-    result = copy.deepcopy(endpoint) if endpoint else {}
+    current = copy.deepcopy(endpoint) if endpoint else {}
+    result: dict[str, Any] = {}
 
-    if isinstance(result.get("protocols"), list):
-        if ACTIVITY not in result["protocols"]:
-            result["protocols"].append(ACTIVITY)
-    else:
-        config = result.get("protocol_configuration")
-        if not isinstance(config, dict) or not config:
-            # Nothing configured yet: keep the default Responses protocol next to Activity.
-            config = {"responses": {}}
-        config.setdefault(ACTIVITY, {})
-        result["protocol_configuration"] = config
+    protocols = current.get("protocols")
+    if isinstance(protocols, list):
+        if ACTIVITY not in protocols:
+            protocols.append(ACTIVITY)
+        result["protocols"] = protocols
 
-    schemes = result.get("authorization_schemes")
+    config = current.get("protocol_configuration")
+    if not isinstance(config, dict) or not config:
+        # Nothing configured yet: keep the default Responses protocol next to Activity.
+        config = {"responses": {}}
+    config.setdefault(ACTIVITY, {})
+    result["protocol_configuration"] = config
+
+    schemes = current.get("authorization_schemes")
     if not isinstance(schemes, list) or not schemes:
         # The portal and SDK use Azure RBAC (Entra) by default; keep it.
         schemes = [{"type": "AzureRbac"}]
@@ -78,14 +87,17 @@ def with_activity(endpoint: dict[str, Any] | None) -> dict[str, Any]:
 
 
 def has_activity(endpoint: dict[str, Any] | None) -> bool:
-    """True when the Activity protocol and BotServiceRbac are both configured."""
+    """True when every protocol field present lists Activity and BotServiceRbac is configured."""
     if not endpoint:
         return False
     protocols = endpoint.get("protocols")
     config = endpoint.get("protocol_configuration")
-    protocol_on = (isinstance(protocols, list) and ACTIVITY in protocols) or (
-        isinstance(config, dict) and ACTIVITY in config
-    )
+    shapes = []
+    if protocols is not None:
+        shapes.append(isinstance(protocols, list) and ACTIVITY in protocols)
+    if config is not None:
+        shapes.append(isinstance(config, dict) and ACTIVITY in config)
+    protocol_on = bool(shapes) and all(shapes)
     schemes = endpoint.get("authorization_schemes") or []
     scheme_on = any(isinstance(s, dict) and s.get("type") == BOT_SERVICE for s in schemes)
     return protocol_on and scheme_on
