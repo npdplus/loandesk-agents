@@ -194,3 +194,27 @@ application numbers run in sequence, so:
 
 Each function app has its own storage account and identity, so the credit API and the MCP server cannot
 use each other's access.
+
+## D15 — No publishing licence in v0.3.0 (2026-11-08)
+
+The maker's trial cannot publish. Publishing needs the USD 0 Copilot Studio user licence, which needs a
+capacity pack (USD 200 a month, billed annually). Not bought. Channels (web, Teams), the identity of a
+published agent and connecting an existing Copilot Studio agent are written as design notes in v0.3.0
+(step 8): what would be built, in which order, and how it would be tested. Everything that works in the
+test pane (child agents, a Foundry agent, content moderation, SharePoint knowledge with the maker's
+sign-in) is built.
+
+## D16 — `LoanDesk-Test` as a managed environment on pay-as-you-go (2026-11-08)
+
+Power Platform Pipelines need the target environment to be a Managed Environment. `LoanDesk-Test` is created
+on the existing pay-as-you-go billing plan and turned into a managed environment, with the pipeline on the
+platform host. LoanDesk is deployed to it as a managed solution and the test set runs there. Usage there is
+billed through the pay-as-you-go meters; if it costs more than expected, the environment is deleted after
+the release and the pipeline is recorded in the results.
+
+## D17 — The Apply Agent becomes the Front Desk (2026-11-08)
+
+Only standard-harness agents host child agents and Foundry agents, and the Apply Agent already holds the
+topics, tools and component collection. It is renamed **LoanDesk Front Desk** (schema name `ldk_applyagent`
+unchanged) and gains a Policy child agent and the Foundry Document Agent. A separate new agent was not built:
+it could not call the Apply Agent as a connected agent without publishing (D15).
