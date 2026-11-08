@@ -70,7 +70,7 @@ build).
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
 | Design multi-agent solutions in Copilot Studio | Front Desk with specialist agents | 0.3.0 | Planned |
-| Integrate a Foundry agent | Document Agent | 0.3.0 | Planned |
+| Integrate a Foundry agent | Foundry prompt agent *LoanDesk Document Agent* (File search over the public checklist), Activity protocol enabled by script, connected to the Apply Agent (preview) | 0.3.0 | Done |
 | Integrate an existing agent in Copilot Studio | Policy Agent connected to Front Desk | 0.3.0 | Planned |
 | Integrate a Fabric data agent | Notes only | — | Study |
 | Create a multi-agent solution by using A2A protocol | Notes only | — | Study |
@@ -80,7 +80,7 @@ build).
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
 | Configure generative answers by using Azure AI Search with Foundry | Policy answers through Foundry | 0.3.0 | Planned |
-| Configure custom prompts to use the Foundry model catalog | Summary prompt on a catalog model | 0.3.0 | Planned |
+| Configure custom prompts to use the Foundry model catalog | *Explain eligibility result 1* on the Foundry deployment `gpt-4.1-mini` (bring your own model) | 0.3.0 | Done |
 | Monitor agents by using Application Insights | Apply Agent telemetry; KQL in `monitoring/queries.kql` (standard harness only) | 0.2.0 | Done |
 
 ## 3. Test and manage agents (20–25 %)
