@@ -146,7 +146,9 @@ The pay-as-you-go billing plan uses two meters only: Dataverse (the first 1 GB o
 capacity per environment are included) and Copilot Studio (per Copilot Credit). Why not a Developer
 environment: see [decision D5](decisions.md).
 
-Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 10 monthly budget alert:
+Azure resources live in one resource group, `rg-loandesk-dev`, with a USD 20 monthly budget alert
+(USD 10 until 2026-11-08; the Power Platform billing plan's Copilot Studio and Dataverse meters count
+against it too):
 
 | Resource | Name | Notes |
 |---|---|---|
