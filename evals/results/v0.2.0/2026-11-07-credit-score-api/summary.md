@@ -100,6 +100,13 @@ inserts reads `triggerBody()['number_4']`, which fails on a missing property. Th
 `if(empty(triggerBody()?['number_4']), 'not available', string(triggerBody()?['number_4']))`. Lesson: use
 `?[...]` for every optional flow input.
 
+Correction (2026-11-09, v0.3.0 step 6): `empty()` accepts only a string, an array or an object, so this
+expression failed the approval step **whenever a score was present** (an integer); R4 passed only because it
+tested the empty case, and R3 ran before the fix. Every application with a score from then until 2026-11-09
+got no approval. Replaced with `if(equals(triggerBody()?['number_4'], null), …)`; see
+`evals/results/v0.3.0/2026-11-09-workflow-follow-ups/`. Lesson: after fixing one case, run the other case
+again.
+
 ## Notes
 
 - The Azure CLI warns that `az functionapp function keys list` shows secrets. The key went into a shell
