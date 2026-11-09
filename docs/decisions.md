@@ -218,3 +218,30 @@ Only standard-harness agents host child agents and Foundry agents, and the Apply
 topics, tools and component collection. It is renamed **LoanDesk Front Desk** (schema name `ldk_applyagent`
 unchanged) and gains a Policy child agent and the Foundry Document Agent. A separate new agent was not built:
 it could not call the Apply Agent as a connected agent without publishing (D15).
+
+## D18 — The Policy child agent reaches Azure AI Search with an admin key (2026-11-09)
+
+On the standard harness Azure AI Search is a **knowledge source** (Add knowledge → Azure AI Search), not
+the Foundry IQ MCP tool of D8. The Policy child agent of the Front Desk uses it over `loan-policy-public`;
+Copilot Studio vectorizes each question with the index's own vectorizer (`text-embedding-3-small` in
+Microsoft Foundry), which is the "Azure AI Search with Foundry" of the study guide.
+
+The connection needs an **admin key**, at set-up and at run time:
+
+| Try | Result |
+|---|---|
+| Query key (`copilot-studio-policy`) | The connection is created, but the index picker fails ("Something went wrong"): a query key cannot list indexes |
+| Admin key to pick the index, then the connection edited to the query key | *Update* runs a connection test that lists indexes and fails, but the new key was saved anyway; the agent then answered "wasn't able to retrieve information" |
+| Admin key | Works |
+
+So the connection *LoanDesk Search public (admin key)* holds the primary admin key. Accepted for a demo with
+fictional data, with these limits:
+
+- The key lives only in the connection; never in the repository, a document or the chat.
+- Regenerate the primary admin key after the v0.3.0 release, and again whenever the connection is no longer
+  needed.
+- In production, use the connection's **Service principal (Microsoft Entra ID application)** option with
+  role-based access on the search service instead of a key.
+
+The query key `copilot-studio-policy` and the connection *LoanDesk Search public (query key)* are unused and
+can be deleted.

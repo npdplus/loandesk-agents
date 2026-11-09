@@ -21,8 +21,9 @@ Contoso Bank offers one product in this demo: the **SME Working Capital Loan**.
 | Submit Application flow | Agent flow: creates the application in Dataverse, asks a credit officer to decide (human in the loop), tells the customer | 0.2.0 |
 | Credit Score API | Azure Function (Python) returning a mock score for a fictional business ID; called through a custom connector and as a REST tool | 0.2.0 |
 | Application Status MCP server | Azure Function (Python) MCP server with one read-only tool, `get_application_status` | 0.2.0 |
-| Front Desk Agent | Orchestrator. Routes each request to the right agent, tool or flow | 0.3.0 |
-| Document Agent | Microsoft Foundry agent. Checks that an application has the required documents and summarises them | 0.3.0 |
+| Front Desk Agent | *LoanDesk Front Desk*, the former Apply Agent (schema name `ldk_applyagent`). Orchestrator: routes each request to the right agent, topic or tool ([section 9](#9-multi-agent-design-from-v030)) | 0.3.0 |
+| Policy child agent | Child agent of the Front Desk. Answers product and policy questions from Azure AI Search (`loan-policy-public`, knowledge source) and names the source | 0.3.0 |
+| Document Agent | Microsoft Foundry prompt agent `loandesk-document-agent`. Says which documents a business still needs, from the public checklist | 0.3.0 |
 
 Study only (no build, because they need extra licences or paid capacity): computer use, a Fabric data
 agent, and the A2A protocol. Notes go in `docs/study/`.
@@ -166,3 +167,46 @@ against it too):
 | Microsoft Foundry | `aif-loandesk-dev-03` | Project `proj-loandesk`; deployment `gpt-4.1-mini` (Global Standard, 10K TPM); maker has Foundry User; used by the custom prompt (bring your own model) and by the Document Agent (v0.3.0) |
 | Foundry agent | `loandesk-document-agent` | Prompt agent in `proj-loandesk`; File search over `required-documents.md`; Responses and Activity protocols, Entra and BotServiceRbac authorization; called by the Apply Agent through the *Azure AI Foundry Agent Service* connection (v0.3.0) |
 | Power Platform billing plan | pay-as-you-go | Dataverse and Copilot Studio meters only |
+
+## 9. Multi-agent design (from v0.3.0)
+
+The customer talks to one agent, **LoanDesk Front Desk** (standard harness, decision D17). Its orchestrator
+(Claude Sonnet 4.6) reads each message and hands it to one of these:
+
+```text
+                                   Customer (test pane; web channel needs a licence that can publish, D15)
+                                                 │
+                                                 ▼
+                         ┌──────────── LoanDesk Front Desk (orchestrator) ────────────┐
+                         │                                                             │
+   ┌─────────────────────┼──────────────┬───────────────┬──────────────┬──────────────┼────────────────┐
+   ▼                     ▼              ▼               ▼              ▼              ▼                ▼
+ Policy             LoanDesk        Check           Rates          Apply          Talk to a       (unknown:
+ child agent        Document Agent  eligibility     topic          topic          person          say so, offer
+   │                (Foundry,       topic             │              │            (component      a person)
+   │                connected,        │               │              │             collection)
+   │                preview)          │               │              │
+   ▼                  ▼               ▼               ▼              ▼
+ Azure AI Search    File search     Rules in the    Topic-level    Submit Application flow
+ loan-policy-public over required-  topic; prompt   knowledge      → Dataverse row
+ (vectorizer:       documents.md    on Foundry      rates-and-     → approval (person decides)
+ Foundry embedding) (gpt-4.1-mini)  gpt-4.1-mini    fees.md        → Credit Score API (HTTP)
+```
+
+Hand-off rules, from the Front Desk instructions and each agent's description:
+
+| Request | Goes to | Never goes to |
+|---|---|---|
+| What the loan is, who can apply in general, amounts, terms, fees, repayment, privacy, AI | Policy child agent | The internal staff index (`loan-policy-staff`) |
+| Which documents to send, by business type | LoanDesk Document Agent (asks for the business type first, or the Front Desk asks) | Customer files: none are uploaded |
+| Whether this business can apply | Check eligibility topic (rules decide; the prompt only explains) | Free-text eligibility checks |
+| The rate for an amount and term | Rates topic | Policy (its instructions refer rates to the topic) |
+| Applying | Apply topic → Submit Application flow | Any AI decision: a credit officer decides |
+| Anything none of them answers | "I don't know" and an offer of a person | Web search (off on the agent and the child agent) |
+
+Notes:
+- The conversation so far reaches a connected Foundry agent, so a follow-up question needs no repetition.
+- A child agent can post its own answer while it runs, even with *After running: Don't respond*; the
+  Policy instructions tell it to return the answer as its result only, which removed a duplicated answer.
+- The staff side (*LoanDesk Staff Agent*, GitHub Copilot harness) is not part of this design; it keeps its
+  own Foundry IQ tool over `loan-policy-staff` (decision D8).
