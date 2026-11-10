@@ -60,3 +60,34 @@ case for step 9 (a refusal must not state facts outside the sources), not fixed 
 | Use information from the Web / Web search | Off |
 | Code interpreter | Off |
 | File uploads | **Off** (was On): customers could otherwise paste real documents with personal data into the chat; the demo takes no customer files |
+
+## SharePoint knowledge (staff agent)
+
+The staff agent (*LoanDesk Staff Agent*, GitHub Copilot harness) runs on **Claude Sonnet 5.5**; the 0.2.0.1
+export already shows `"series": "claude-sonnet-5-5"` for the staff and customer agents, so the v0.2.0 results
+used it too. The Front Desk (standard harness) runs on Claude Sonnet 4.6.
+
+Set-up:
+- A new fictional guide, `knowledge/sharepoint/loandesk-approvals-staff-guide.md` (expired approvals, comment
+  format with reason codes, a score that says "not available"), uploaded as
+  *LoanDesk Approvals - Staff Quick Guide.docx* to the Documents library of the private site
+  *Contoso Bank Lending*. None of it is in the search indexes, so an answer with it proves the SharePoint
+  source.
+- Staff agent → Knowledge → **+** → SharePoint → **Browse items** → that one file (not the whole site).
+  The dialog says SharePoint is available only to authenticated users; tested with the maker's sign-in.
+- One rule added to the instructions after the first rule: *For how to handle approval requests in LoanDesk
+  (expired requests, comments and reason codes, a credit score that says "not available"), use the SharePoint
+  guide "LoanDesk Approvals — Staff Quick Guide" and add its file name to the Source line.*
+
+| # | Question (new chat each) | Tools used | Answer | Credits | Pass |
+|---|---|---|---|---|---|
+| S1 | "An approval request expired. What happens to the application and how do I restart it?" | `sharepoint_semantic_search` **failed** ("Knowledge search · unknown"); `knowledge_base_retrieve`, `sharepoint_lexical_search`, `knowledge_base_retrieve` | Expires after 7 days → Needs information with the reason; answering an expired request has no effect; the team lead sets it back to Submitted and sends a new request. Source and citation: the SharePoint guide | 14.69 | Yes |
+| S2 | "How should I write my comment when I approve a lower amount?" | Same pattern, semantic search failed again | A02 from the manual, the guide's example, the comment is stored as the decision reason; related decision-guide rows and the four-eyes rule; reminder not to share thresholds. Source: the guide and `credit-manual-internal.md` | 10.4 | Yes |
+| S3 | "What does the decision guide say for a credit score of 650?" | `knowledge_base_retrieve` only | The 600–699 rows, four-eyes rule, reason codes, "not a recommendation", reminder. Source: `credit-manual-internal.md` | 4.13 | Yes |
+
+Findings:
+- **SharePoint semantic search fails every time; lexical search works.** Semantic search over SharePoint
+  probably needs the tenant's semantic index (Microsoft 365 Copilot licence; the tenant has Business Basic).
+  The agent falls back to lexical search by itself, so the answers are right, but each failed call is spent.
+- **Cost.** The staff agent's answers that combine SharePoint and the index cost 10–15 Copilot Credits each
+  (S1, S2), about three times an index-only answer (S3).
