@@ -52,7 +52,7 @@ build).
 
 | Skill | Where in LoanDesk | Version | Status |
 |---|---|---|---|
-| Connect to Copilot connectors | A Copilot connector as an extra knowledge source | 0.3.0 | Planned |
+| Connect to Copilot connectors | Enterprise websites connector over a public glossary, indexed and added to the Front Desk as knowledge; queries fail in this tenant (connector search error), so the answer path is untested | 0.3.0 | Partial |
 | Connect to Microsoft Power Platform connectors | Dataverse, Approvals and Office 365 Outlook connectors in the Submit Application flow | 0.2.0 | Done |
 | Connect to Azure AI Search | Foundry IQ knowledge bases over `loan-policy-public` and `loan-policy-staff`, through the Foundry IQ MCP tool (customer agent connected 2026-11-05; decision D8) | 0.1.0 | Done |
 

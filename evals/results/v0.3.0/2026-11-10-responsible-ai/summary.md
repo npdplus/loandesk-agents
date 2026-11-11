@@ -91,3 +91,57 @@ Findings:
   The agent falls back to lexical search by itself, so the answers are right, but each failed call is spent.
 - **Cost.** The staff agent's answers that combine SharePoint and the index cost 10–15 Copilot Credits each
   (S1, S2), about three times an index-only answer (S3).
+
+## Copilot connector (Front Desk)
+
+Source: `knowledge/web/loan-glossary.md` (public, fictional, not in the indexes), read from its raw GitHub URL
+on `main`. Copilot connectors as knowledge work only with **standard-harness** agents, so the Front Desk gets
+it; the staff agent (GitHub Copilot harness) cannot.
+
+Set-up, Microsoft 365 admin center → Copilot → Connectors → Gallery → **Enterprise websites Cloud** (not
+On-premises):
+- Display name *LoanDesk public glossary*; one URL; no sitemap; subdirectory option off; authentication
+  **None**; permissions *Everyone* (the only option for this connector); the Notice accepted by the owner.
+- Connection `IntranetSites2611101415` created and validated at 21:20; the first crawl finished within the
+  hour: **1 item indexed, 0 errors**. The index browser shows the raw URL as *Indexed*, visible to all users,
+  with URL, Content, Title, FileType and LastModifiedDateTime indexed (plain text has no description,
+  keywords or authors). `raw.githubusercontent.com` has no robots.txt and serves the file as `text/plain`.
+- Connector description added afterwards in the connection's detail pane.
+- Copilot Studio → Front Desk → Knowledge → Add knowledge → Copilot connectors → *LoanDesk public glossary*
+  (listed as type "Graph connector", available to the whole agent), *Ready*.
+
+| # | Message (new session each) | Result | Pass |
+|---|---|---|---|
+| G1 | "What does "reducing balance" mean?" | Answered from `product-sheet.md` and `rates-and-fees.md`, not the glossary; adds an invented THB 1,000,000 example, "also called declining balance" and "more favourable than a flat-rate method" | No (source) |
+| G2 | "What is a BOJ.5?" | The glossary was searched but failed: *Service error — try again later*, `TwoStepFanout_FirstStepFailed in SubstrateSearch.FanoutV2.Plugins.Connectors.ConnectorSearchMultiDimensionFanoutPlugin`; the answer says nothing was found and offers a person | No (service error) |
+
+The Front Desk uses **Authenticate with Microsoft** (Settings → Security → Authentication), so the search runs
+as the signed-in maker; authentication is not the cause. Likely causes, to check on 2026-11-11: the search
+side of a new connection not ready yet ("try again later"), or connector search needing what this tenant
+lacks (Microsoft 365 Copilot, as with SharePoint semantic search above). Checks: search `BOJ.5` on
+microsoft365.com, then G2 again.
+
+Design note for step 8: the Front Desk already requires Microsoft sign-in. A public web channel for
+anonymous customers would need *No authentication*, and then neither the SharePoint nor the Copilot connector
+source would work for it (both search as the user).
+
+### Follow-up checks (2026-11-11, about 13 hours later)
+
+Microsoft 365 search (microsoft365.com → Search, signed in as the maker):
+
+| Query | Matches | Result |
+|---|---|---|
+| `BOJ.5` | Only the glossary (connector) | *Something went wrong* (also on 2026-11-10) |
+| `Staff Quick Guide` | Only the SharePoint guide | **Found** (SharePoint, Shared Documents) |
+| `glossary` | The glossary (connector) | *Something went wrong* |
+| `reducing balance` | The glossary (connector) | *Something went wrong* |
+
+Search works for SharePoint content and fails for every query that the connector would answer, the same
+failure as G2 in Copilot Studio. Ingestion works (1 item, *Indexed*); querying the connector does not, in
+Microsoft 365 search and in Copilot Studio alike. The cause is on the service side, most likely a licence
+limit of this tenant (Microsoft 365 Business Basic, no Microsoft 365 Copilot); nothing in the agent's
+settings changes it.
+
+**Outcome: partial.** The connector set-up and its use as Copilot Studio knowledge are done and recorded;
+the answer path is untested. Coverage line *Connect to Copilot connectors* is **Partial**. The connection is
+left in place (no cost at this size); if search starts to work, G1 and G2 can be re-run.
