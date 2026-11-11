@@ -124,3 +124,24 @@ microsoft365.com, then G2 again.
 Design note for step 8: the Front Desk already requires Microsoft sign-in. A public web channel for
 anonymous customers would need *No authentication*, and then neither the SharePoint nor the Copilot connector
 source would work for it (both search as the user).
+
+### Follow-up checks (2026-11-11, about 13 hours later)
+
+Microsoft 365 search (microsoft365.com → Search, signed in as the maker):
+
+| Query | Matches | Result |
+|---|---|---|
+| `BOJ.5` | Only the glossary (connector) | *Something went wrong* (also on 2026-11-10) |
+| `Staff Quick Guide` | Only the SharePoint guide | **Found** (SharePoint, Shared Documents) |
+| `glossary` | The glossary (connector) | *Something went wrong* |
+| `reducing balance` | The glossary (connector) | *Something went wrong* |
+
+Search works for SharePoint content and fails for every query that the connector would answer, the same
+failure as G2 in Copilot Studio. Ingestion works (1 item, *Indexed*); querying the connector does not, in
+Microsoft 365 search and in Copilot Studio alike. The cause is on the service side, most likely a licence
+limit of this tenant (Microsoft 365 Business Basic, no Microsoft 365 Copilot); nothing in the agent's
+settings changes it.
+
+**Outcome: partial.** The connector set-up and its use as Copilot Studio knowledge are done and recorded;
+the answer path is untested. Coverage line *Connect to Copilot connectors* is **Partial**. The connection is
+left in place (no cost at this size); if search starts to work, G1 and G2 can be re-run.
